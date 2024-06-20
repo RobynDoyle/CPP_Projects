@@ -66,11 +66,11 @@ double withdraw(double balance){
     cin >> withdraw_amount;
 
     if (withdraw_amount > balance){
-        cout << "Not enough funds";
+        cout << "Not enough funds" << endl;
         return 0;
     }
     else if (withdraw_amount < 0){
-        cout << "Not a vaild amount";
+        cout << "Not a vaild amount" << endl;
         return 0;
 
     }
