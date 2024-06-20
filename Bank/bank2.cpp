@@ -2,7 +2,7 @@
 #include <iomanip>
 using namespace std;
 
-
+// Set functions to be called later
 void showBalance(double balance);
 double deposit();
 double withdraw(double balance);
@@ -12,11 +12,15 @@ int main(){
     double balance = 0.23;
     int choice;
     
-    do{    
+    do{ 
+        //tell user the options   
         cout << "\n 1: Show balance\n 2: Deposit\n 3: Withdraw\n 4: Exit \n";
+       
+       // clear and flush in case non numeric is entered. 
         cin.clear();
         fflush(stdin);
 
+        //user chooses
         cin >> choice;
 
         switch(choice){
@@ -71,9 +75,10 @@ double withdraw(double balance){
 
     }
     else {
+        // reuturn the value to withdraw to main
         return withdraw_amount;
     }
     
-    
-    return withdraw_amount;
+    // reuturn the value to withdraw to main
+    //return withdraw_amount;
 }
