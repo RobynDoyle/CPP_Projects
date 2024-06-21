@@ -1,21 +1,17 @@
 // Welcome to rock paper scissors file.
-// Main menu lets users play or exit. TODO - Add counter for overall wins, losses and draws
-// User is promotped to choose a weapon via 1 2 or 3
-// Computer choice wil be srand(time NULL) % 3 +1 
+// Main menu lets users play or exit. A counter for overall wins, losses and draws
+// User is prompted to choose a weapon via 1 2 or 3
+// Computer choice wil be srand(time nullptr) % 3 +1 
 // Winner is declared.
 
 #include <iostream>
 #include <ctime>
 using namespace std;
 
-
-
 int choose(int weapon);
 int game(int user_total_wins, int computer_total_wins, int total_draws);
 int choose_comp_weapon(int comp_weapon);
 int who_wins(int weapon, int comp_weapon);
-int total_wins(int winner);
-
 
 
 //main function
@@ -48,7 +44,7 @@ int game(int user_total_wins, int computer_total_wins, int total_draws){
     
 
     switch(menu){
-        case 1: weapon += choose(weapon); 
+        case 1: weapon = choose(weapon); 
         // output the weapon name            
             switch(weapon){
             case 1: cout << "You chose: Rock\n";
@@ -59,7 +55,7 @@ int game(int user_total_wins, int computer_total_wins, int total_draws){
                 break;          
         }
         // output the name of weapon that computer chose
-            comp_weapon += choose_comp_weapon(comp_weapon);
+            comp_weapon = choose_comp_weapon(comp_weapon);
             switch(comp_weapon){
             case 1: cout << "Computer chose: Rock\n";
                 break;
@@ -70,7 +66,7 @@ int game(int user_total_wins, int computer_total_wins, int total_draws){
             
             }
 
-            winner += who_wins(weapon, comp_weapon);
+            winner = who_wins(weapon, comp_weapon);
 
             
 
@@ -85,34 +81,12 @@ int game(int user_total_wins, int computer_total_wins, int total_draws){
                     total_draws +=1;
                     break;
             }
-
-
-            /*
-
-            if (winner == 3){
-                total_draws +=1;
-                    //break;
-                
-            }
-            else if (winner == 1){
-                user_total_wins += 1;
-                    //break;
-            }
-            else {
-                computer_total_wins += 1;
-                    break;
-            }
-            
-            */
-            // loop back to main menu
             return game(user_total_wins, computer_total_wins, total_draws);
             break;
         case 2: cout << "Thanks for visiting!\n" << endl;
         cout << "###################### GAME OVER ########################\n" << endl;
             break;
     }
-
-    //cout << choice << endl;
     return 0;
 }
 
@@ -183,7 +157,3 @@ int who_wins(int weapon, int comp_weapon){
     }
 }
 
-//count total user wins, computer, and draws
-int total_wins(int winner){
-    return 6;
-}
