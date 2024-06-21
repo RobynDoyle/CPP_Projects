@@ -11,7 +11,6 @@ using namespace std;
 int choose(int weapon);
 int choose_comp_weapon(int comp_weapon);
 int who_wins(int weapon, int comp_weapon);
-//int showWeapon(int weapon)
 
 //main function
 int main(){
@@ -38,9 +37,9 @@ int main(){
             switch(weapon){
             case 1: cout << "You chose: Rock\n";
                 break;
-            case 2: cout << "You chose: Paper\n";
+            case 2: cout << "You chose: Scissors\n";
                 break;
-            case 3: cout << "You chose: Scissors\n";
+            case 3: cout << "You chose: Paper\n";
                 break;          
         }
         // output the name of weapon that computer chose
@@ -48,9 +47,9 @@ int main(){
             switch(comp_weapon){
             case 1: cout << "Computer chose: Rock\n";
                 break;
-            case 2: cout << "Computer chose: Paper\n";
+            case 2: cout << "Computer chose: Scissors\n";
                 break;
-            case 3: cout << "Computer chose: Scissors\n";
+            case 3: cout << "Computer chose: Paper\n";
                 break;   
             
             }
@@ -65,7 +64,8 @@ int main(){
                 case 3: cout << "Draw!\n";
                     break;
             }
-            // break out menu
+            // loop back to main menu
+            return main();
             break;
         case 2: cout << "Thanks for visiting!\n";
             break;
@@ -78,26 +78,15 @@ int main(){
 //User chooses their weapon
 int choose(int weapon){
 
-    
     cout << "################### CHOOSE WEAPON #######################\n" << endl;   
 
-    cout << "1 = Rock\n2 = Paper\n3 = Scissors\n" << endl; 
+    cout << "1 = Rock\n2 = Scissors\n3 = Paper\n" << endl; 
     cout << "Weapon choice: ";
     cin >> weapon;
     cout << "" << endl;
     
-    
-    
      if(weapon == 1 || weapon == 2 || weapon == 3){
-        /*
-        switch(weapon){
-            case 1: cout << "Nice, you chose Rock\n";
-                break;
-            case 2: cout << "Nice, you chose Paper\n";
-                break;
-            case 3: cout << "Nice, you chose Scissors\n";
-                break;          
-        }*/
+        
         return weapon;
     }   
     else {
@@ -108,11 +97,11 @@ int choose(int weapon){
 }
 
 
-// Randomly generated wepaon for computer player
+// Randomly generated weapon for computer player
 int choose_comp_weapon(int comp_weapon){
 
     // sets random number generator
-    srand(time(NULL));
+    srand(time(nullptr));
 
     // we need 1, 2, or 3. SO we use modulus 3
     int number_of_game_weapons = 3;
@@ -126,4 +115,8 @@ int choose_comp_weapon(int comp_weapon){
 int who_wins(int weapon, int comp_weapon){
 
     return 2;
+    int total_win_check;
+    total_win_check = weapon + comp_weapon;
+
+    // rock > scissros > paper > rock 
 }
