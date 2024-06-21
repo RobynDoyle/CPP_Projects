@@ -22,7 +22,7 @@ int main(){
     game(user_total_wins, computer_total_wins, total_draws);
 }
 
-
+// game function (this loops till we exit)
 int game(int user_total_wins, int computer_total_wins, int total_draws){
     // Set player weapon var
     int weapon = 0;
@@ -38,6 +38,11 @@ int game(int user_total_wins, int computer_total_wins, int total_draws){
     cout << "" << endl;
     cout << "1 = Play game\n2 = Exit\n" << endl; 
     cout << "Choose Menu option: ";
+    
+    // clear and flush in case non numeric is entered. 
+    cin.clear();
+    fflush(stdin);
+
     cin >> menu;
     cout << "" << endl;
  
@@ -97,7 +102,11 @@ int choose(int weapon){
 
     cout << "1 = Rock\n2 = Scissors\n3 = Paper\n" << endl; 
     cout << "Weapon choice: ";
-    cin >> weapon;
+    
+    //An issue here is to not enter a letter! TODO - check if letter or digit.
+    do {cin >> weapon;
+    }while(weapon != 1 && weapon != 2 && weapon != 3 && weapon );
+
     cout << "" << endl;
     
      if(weapon == 1 || weapon == 2 || weapon == 3){
