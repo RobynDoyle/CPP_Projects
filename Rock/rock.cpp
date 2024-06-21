@@ -76,10 +76,13 @@ int game(int user_total_wins, int computer_total_wins, int total_draws){
 
             switch(winner){
                 case 1: cout << "WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! \n";
+                    user_total_wins += 1;
                     break;
                 case 2: cout << "LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! \n";
+                    computer_total_wins += 1;
                     break;
                 case 3: cout << "DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! \n";
+                    total_draws +=1;
                     break;
             }
 
