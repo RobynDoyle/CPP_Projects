@@ -8,21 +8,37 @@
 #include <ctime>
 using namespace std;
 
+
+
 int choose(int weapon);
+int game(int user_total_wins, int computer_total_wins, int total_draws);
 int choose_comp_weapon(int comp_weapon);
 int who_wins(int weapon, int comp_weapon);
+int total_wins(int winner);
+
+
 
 //main function
 int main(){
+    int user_total_wins = 0;
+    int computer_total_wins = 0;
+    int total_draws = 0;
+    game(user_total_wins, computer_total_wins, total_draws);
+}
+
+
+int game(int user_total_wins, int computer_total_wins, int total_draws){
     // Set player weapon var
     int weapon = 0;
     int winner = 0;
+    int total_wins;
 
     // set computer weapon var
     int comp_weapon = 0;
     int menu;
     cout << "" << endl;
     cout << "################### ROCK PAPER SCISSORS #################" << endl;
+    cout << "WIN = " << user_total_wins << " LOST = " << computer_total_wins << " DRAW = " << total_draws << endl;  
     cout << "" << endl;
     cout << "1 = Play game\n2 = Exit\n" << endl; 
     cout << "Choose Menu option: ";
@@ -56,16 +72,37 @@ int main(){
 
             winner += who_wins(weapon, comp_weapon);
 
+            
+
             switch(winner){
-                case 1: cout << "You win!\n";
+                case 1: cout << "WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! WIN! \n";
                     break;
-                case 2: cout << "Computer wins!\n";
+                case 2: cout << "LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! LOSE! \n";
                     break;
-                case 3: cout << "Draw!\n";
+                case 3: cout << "DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! DRAW! \n";
                     break;
             }
+
+
+            /*
+
+            if (winner == 3){
+                total_draws +=1;
+                    //break;
+                
+            }
+            else if (winner == 1){
+                user_total_wins += 1;
+                    //break;
+            }
+            else {
+                computer_total_wins += 1;
+                    break;
+            }
+            
+            */
             // loop back to main menu
-            return main();
+            return game(user_total_wins, computer_total_wins, total_draws);
             break;
         case 2: cout << "Thanks for visiting!\n" << endl;
         cout << "###################### GAME OVER ########################\n" << endl;
@@ -96,7 +133,6 @@ int choose(int weapon){
     }
 
 }
-
 
 // Randomly generated weapon for computer player
 int choose_comp_weapon(int comp_weapon){
@@ -142,4 +178,9 @@ int who_wins(int weapon, int comp_weapon){
     else {
         return 2;
     }
+}
+
+//count total user wins, computer, and draws
+int total_wins(int winner){
+    return 6;
 }
