@@ -67,7 +67,8 @@ int main(){
             // loop back to main menu
             return main();
             break;
-        case 2: cout << "Thanks for visiting!\n";
+        case 2: cout << "Thanks for visiting!\n" << endl;
+        cout << "###################### GAME OVER ########################\n" << endl;
             break;
     }
 
@@ -114,9 +115,34 @@ int choose_comp_weapon(int comp_weapon){
 // Calculation for who wins or if its a draw
 int who_wins(int weapon, int comp_weapon){
 
-    return 2;
-    int total_win_check;
-    total_win_check = weapon + comp_weapon;
+    if (weapon == 1 && comp_weapon == 1){
+        return 3;
+    }
+    else if (weapon == 2 && comp_weapon == 2){
+        return 3;
+    }
+    else if (weapon == 3 && comp_weapon == 3){
+        return 3;
+    }
+    else if (weapon == 1 && comp_weapon == 2){
+        return 1;
+    }
+    else if (weapon == 2 && comp_weapon == 3){
+        return 1;
+    }
+    else if (weapon == 3 && comp_weapon == 1){
+        return 1;
+    }
+    else if (weapon == 1 && comp_weapon == 3){
+        return 2;
+    }
+    else if (weapon == 2 && comp_weapon == 1){
+        return 2;
+    }
+    else 
+    {
+        return 2;
+    }
 
     // rock > scissros > paper > rock 
 }
