@@ -114,7 +114,7 @@ int choose_comp_weapon(int comp_weapon){
 
 // Calculation for who wins or if its a draw
 int who_wins(int weapon, int comp_weapon){
-
+// rock > scissros > paper > rock 
     if (weapon == 1 && comp_weapon == 1){
         return 3;
     }
@@ -139,10 +139,7 @@ int who_wins(int weapon, int comp_weapon){
     else if (weapon == 2 && comp_weapon == 1){
         return 2;
     }
-    else 
-    {
+    else {
         return 2;
     }
-
-    // rock > scissros > paper > rock 
 }
