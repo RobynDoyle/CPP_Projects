@@ -1,23 +1,31 @@
 #include <iostream>
 using namespace std;
 
-int choose(int choice);
+int choose(int weapon);
+//int showWeapon(int weapon)
 
 
 int main(){
-
+    int weapon = 0;
     int menu;
-    int choice;
-
-    cout << "Choose 1 or 2\n 1 = Play game\n 2 = Exit\n" << endl; 
+    cout << "" << endl;
+    cout << "################### ROCK PAPER SCISSORS #################" << endl;
+    cout << "" << endl;
+    cout << "1 = Play game\n2 = Exit\n" << endl; 
+    cout << "Choose Menu option: ";
     cin >> menu;
+    cout << "" << endl;
+ 
+    
 
     switch(menu){
-        case 1: choose(choice);
+        case 1: weapon += choose(weapon); 
             break;
         case 2: cout << "Thanks for visiting!\n";
             break;
     }
+
+    cout << weapon << endl;
 
     //cout << choice << endl;
     return 0;
@@ -27,28 +35,32 @@ int main(){
 }
 
 
-int choose(int choice){
+int choose(int weapon){
 
     
+    cout << "################### CHOOSE WEAPON #######################\n" << endl;   
 
-    cout << "Choose 1, 2 or 3: 1 = Rock, 2 = Paper, 3 = Scissors" << endl; 
-    cin >> choice;
+    cout << "1 = Rock\n2 = Paper\n3 = Scissors\n" << endl; 
+    cout << "Weapon choice: ";
+    cin >> weapon;
     
-     if(choice == 1 || choice == 2 || choice == 3){
+    
+    
+     if(weapon == 1 || weapon == 2 || weapon == 3){
         
-        switch(choice){
-            case 1: cout << "Nice, you chose rock\n";
+        switch(weapon){
+            case 1: cout << "Nice, you chose Rock\n";
                 break;
-            case 2: cout << "Nice, you chose paper\n";
+            case 2: cout << "Nice, you chose Paper\n";
                 break;
-            case 3: cout << "Nice, you chose scissors\n";
+            case 3: cout << "Nice, you chose Scissors\n";
                 break;          
         }
-        return choice;
+        return weapon;
     }   
     else {
         cout << "Oh no, you need to enter 1 2 or 3\n";
-        return 0;
+        return 5;
     }
 
 }
