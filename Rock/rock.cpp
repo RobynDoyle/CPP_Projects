@@ -10,12 +10,14 @@ using namespace std;
 
 int choose(int weapon);
 int choose_comp_weapon(int comp_weapon);
+int who_wins(int weapon, int comp_weapon);
 //int showWeapon(int weapon)
 
-
+//main function
 int main(){
     // Set player weapon var
     int weapon = 0;
+    int winner = 0;
 
     // set computer weapon var
     int comp_weapon = 0;
@@ -34,17 +36,36 @@ int main(){
         case 1: weapon += choose(weapon); 
         // output the weapon name            
             switch(weapon){
-            case 1: cout << "You chose Rock\n";
+            case 1: cout << "You chose: Rock\n";
                 break;
-            case 2: cout << "You chose Paper\n";
+            case 2: cout << "You chose: Paper\n";
                 break;
-            case 3: cout << "You chose Scissors\n";
+            case 3: cout << "You chose: Scissors\n";
                 break;          
         }
-
-
+        // output the name of weapon that computer chose
             comp_weapon += choose_comp_weapon(comp_weapon);
-            cout << "Your opponent chose" << comp_weapon;
+            switch(comp_weapon){
+            case 1: cout << "Computer chose: Rock\n";
+                break;
+            case 2: cout << "Computer chose: Paper\n";
+                break;
+            case 3: cout << "Computer chose: Scissors\n";
+                break;   
+            
+            }
+
+            winner += who_wins(weapon, comp_weapon);
+
+            switch(winner){
+                case 1: cout << "You win!\n";
+                    break;
+                case 2: cout << "Computer wins!\n";
+                    break;
+                case 3: cout << "Draw!\n";
+                    break;
+            }
+            // break out menu
             break;
         case 2: cout << "Thanks for visiting!\n";
             break;
@@ -54,6 +75,7 @@ int main(){
     return 0;
 }
 
+//User chooses their weapon
 int choose(int weapon){
 
     
@@ -62,6 +84,7 @@ int choose(int weapon){
     cout << "1 = Rock\n2 = Paper\n3 = Scissors\n" << endl; 
     cout << "Weapon choice: ";
     cin >> weapon;
+    cout << "" << endl;
     
     
     
@@ -84,6 +107,8 @@ int choose(int weapon){
 
 }
 
+
+// Randomly generated wepaon for computer player
 int choose_comp_weapon(int comp_weapon){
 
     // sets random number generator
@@ -97,3 +122,8 @@ int choose_comp_weapon(int comp_weapon){
     return comp_weapon;
 }
 
+// Calculation for who wins or if its a draw
+int who_wins(int weapon, int comp_weapon){
+
+    return 2;
+}
