@@ -125,10 +125,10 @@ bool checkWinner(char *spaces, char player, char computer){
 bool checkTie(char *spaces){
     for(int i = 0; i < 9; i++){
         if(spaces[i] == ' '){
-        break;
+        return false;
         }
        
-        return false;
+        
     }
     cout << "It's a tie!";
     return true;
