@@ -9,7 +9,7 @@ int main (){
 
     pointer = &x;
 
-    if(pointer == null){
+    if(pointer == NULL){
         "Address is no assigned ";
     } 
     else{
