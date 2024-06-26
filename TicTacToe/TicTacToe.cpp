@@ -1,6 +1,4 @@
 #include <iostream>
-// #include <ctime>
-
 using namespace std;
 
 void drawBoard(char *spaces);
@@ -36,9 +34,13 @@ int main(){
             running = false;
             break;
         }
+         else if(checkTie(spaces)){
+            running = false;
+            break;
+        }
     }
 
-    
+    cout << "Thanks for playing!\n";
 
     return 0;
 }
@@ -121,5 +123,15 @@ bool checkWinner(char *spaces, char player, char computer){
     return true;
 }
 bool checkTie(char *spaces){
-    return 0;
+    for(int i = 0; i < 9; i++){
+        if(spaces[i] == ' '){
+        break;
+        }
+       
+        return false;
+    }
+    cout << "It's a tie!";
+    return true;
+    
+    
 }
