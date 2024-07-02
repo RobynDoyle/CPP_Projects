@@ -3,6 +3,14 @@ import requests
 import pandas as pd
 import time 
 
+def Globals():
+    global race_links_list
+    race_links_list = []
+    global F1_list
+    F1_list = []
+    global counter
+    counter = 0
+
 def Set_connection():
     # Define the URL of the website you want to scrape
     url = "https://www.formula1.com/en/results.html/2023/races.html"
@@ -19,7 +27,7 @@ def Set_connection():
     soup = BeautifulSoup(response.content, 'html.parser')
 
     # Make list to store links for each race event
-    race_links_list = []
+    
     race_name_list = []
     
 
@@ -40,10 +48,6 @@ def Set_connection():
         
         race_links_list.append(race_link)
 
-        
-
-
-        
 
         for race in race_name:
             
@@ -51,17 +55,21 @@ def Set_connection():
             race_name_list.append(race.text.strip())
         
     
-    print(race_links_list)
+    # print(race_links_list)
+    # return race_links_list
     
     
     #print(soup)
     # return soup
-"""
-def Scrape_page():
+
+def Scrape_page(x):
     
     #This sets soup = to output of Set_Connection Function
     # soup = Set_connection()
-
+    url = f"https://www.formula1.com{x}" 
+    response = requests.get(url)
+     # set up html for scraping     
+    soup = BeautifulSoup(response.content, 'html.parser')
 
     # find table for scraping
     table = soup.find_all('table')[0]
@@ -70,11 +78,11 @@ def Scrape_page():
     # Select rows of drivers race data
     row = table.find_all('tr')[1:21]
     # print(colum_header)
-    # print(row)
     
-    
-    #Set list
-    F1_list = []
+    race_name_now = f"{x[33:]}" 
+    head, sep, tail = race_name_now.partition('/')
+    global counter
+    counter += 1
 
     # loop through each row for each driver
     for item in row:
@@ -82,8 +90,10 @@ def Scrape_page():
         
         
         #Set dictionary
-        F1_dict = {  
-        'Race' : "Bahrain 2023",    
+        F1_dict = {     
+        'Race' : head,
+        'Year' : "2023",
+        'Race number' : counter,
         'Position' : item.find('td', {'class' : 'dark'}).text,
         'Driver number' : item.find('td', {'class' : 'dark hide-for-mobile'}).text,
         'First name' : item.find('span', {'class' : 'hide-for-tablet'}).text,
@@ -98,24 +108,36 @@ def Scrape_page():
         # Append list
         F1_list.append(F1_dict)
 
+
     # return(F1_list)
 
     
 
-    #pass to data frame
-    df = pd.DataFrame(F1_list)
-    #print(df)
-    df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/Bahrain_2023.csv', index = False)
+    # #pass to data frame
+    # df = pd.DataFrame(F1_list)
+    # #print(df)
+    # df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/Bahrain_2023.csv', index = False)
 
 # name as race name!!! which can be scraped imo
     
-"""
+
 
 def main():
 
-     Set_connection()
-    # Scrape page
-    # Scrape_page()
+    Globals()
+    Set_connection()
+    
+    #run Data scraper
+    for x in race_links_list:
+        Scrape_page(x)
+        time.sleep(.1) 
+        #print(x)
+                                                                                                
+    #pass to data frame
+    df = pd.DataFrame(F1_list)
+    #print(df)
+    df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/2023_Season_Race_data.csv', index = False)
+
 
 # Start script
 main()
