@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 
 using namespace std;
 
@@ -13,6 +14,8 @@ int main (){
 
     // Runs welcome programme that allows user to choose their name.
     Welcome(playerName, ai_one);
+
+    
     
 
 

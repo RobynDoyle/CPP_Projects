@@ -1,0 +1,19 @@
+{
+    "terminal.integrated.persistentSessionScrollback": 1000,
+    "terminal.integrated.scrollback": 1000000,
+    "terminal.integrated.inheritEnv": false,
+    "code-runner.runInTerminal": true,
+    "files.autoSave": "afterDelay",
+    "C_Cpp.default.systemIncludePath":[
+        "/usr/local/include",
+        "/usr/local/mysql-connector-c++-8.0.31/include/jdbc/",
+        "/usr/",
+        "/usr/local/"
+    ],
+    "C_Cpp.default.compilerPath": "",
+    "C_Cpp.default.includePath": [
+        "/usr/local/include"
+    ]
+
+    
+}
