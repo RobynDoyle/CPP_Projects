@@ -3,6 +3,7 @@ import requests
 import pandas as pd
 import time 
 
+# Creat global variables
 def Globals():
     global race_links_list
     race_links_list = []
@@ -11,6 +12,7 @@ def Globals():
     global counter
     counter = 0
 
+# Connect to page
 def Set_connection():
     # Define the URL of the website you want to scrape
     url = "https://www.formula1.com/en/results.html/2023/races.html"
@@ -62,6 +64,7 @@ def Set_connection():
     #print(soup)
     # return soup
 
+# Scrape race page data
 def Scrape_page(x):
     
     #This sets soup = to output of Set_Connection Function
@@ -118,10 +121,7 @@ def Scrape_page(x):
     # #print(df)
     # df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/Bahrain_2023.csv', index = False)
 
-# name as race name!!! which can be scraped imo
-    
-
-
+# Call functions  
 def main():
 
     Globals()
@@ -137,7 +137,6 @@ def main():
     df = pd.DataFrame(F1_list)
     #print(df)
     df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/2023_Season_Race_data.csv', index = False)
-
 
 # Start script
 main()

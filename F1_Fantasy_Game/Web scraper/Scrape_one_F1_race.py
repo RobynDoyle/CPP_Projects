@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup 
 import requests
 import pandas as pd
-import time 
 
 def Set_connection():
     # Define the URL of the website you want to scrape
@@ -78,10 +77,6 @@ def Scrape_page():
     df = pd.DataFrame(F1_list)
     #print(df)
     df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Bahrain_2023.csv', index = False)
-
-# name as race name!!! which can be scraped imo
-    
-
 
 def main():
 
