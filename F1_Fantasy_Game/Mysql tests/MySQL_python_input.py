@@ -17,7 +17,7 @@ def query_with_variables(Race, Driver):
             cursor = connection.cursor()
 
             # Use parameterized query
-            query = "SELECT Points FROM 2023_season_race_data WHERE `Race number` = %s AND Initials = %s"
+            query = "SELECT Points FROM F1_2023 WHERE Race_number = %s AND Initials = %s"
             cursor.execute(query, (Race, Driver))
 
             # Fetch the results
