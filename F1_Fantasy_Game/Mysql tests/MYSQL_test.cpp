@@ -26,12 +26,12 @@ int main() {
         std::unique_ptr<sql::Statement> stmt(con->createStatement());
 
         // Execute a query
-        std::unique_ptr<sql::ResultSet> res(stmt->executeQuery("SELECT * FROM 2023_season_race_data"));
+        std::unique_ptr<sql::ResultSet> res(stmt->executeQuery("SELECT Race FROM 2023_season_race_data"));
 
         // Iterate through the result set and print results
         while (res->next()) {
-            std::cout << "id = " << res->getInt("id") << ", ";
-            std::cout << "name = " << res->getString("name") << std::endl;
+            std::cout << "Race = " << res->getInt("id") << ", ";
+            // std::cout << "name = " << res->getString("name") << std::endl;
         }
     } catch (sql::SQLException& e) {
         std::cerr << "SQLException: " << e.what() << std::endl;

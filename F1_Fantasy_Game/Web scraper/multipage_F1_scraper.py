@@ -99,11 +99,11 @@ def Scrape_page(x):
         F1_dict = {     
         'Race' : head,
         'Year' : "2023",
-        'Race number' : counter,
+        'Race_number' : counter,
         'Position' : item.find('td', {'class' : 'dark'}).text,
-        'Driver number' : item.find('td', {'class' : 'dark hide-for-mobile'}).text,
-        'First name' : item.find('span', {'class' : 'hide-for-tablet'}).text,
-        'Last name' : item.find('span', {'class' : 'hide-for-mobile'}).text,
+        'Driver_number' : item.find('td', {'class' : 'dark hide-for-mobile'}).text,
+        'First_name' : item.find('span', {'class' : 'hide-for-tablet'}).text,
+        'Last_name' : item.find('span', {'class' : 'hide-for-mobile'}).text,
         'Initials' : item.find('span', {'class' : 'uppercase hide-for-desktop'}).text,
         'Car' : item.find('td', {'class' : 'semi-bold uppercase hide-for-tablet'}).text,
         'Laps' : item.find('td', {'class' : 'bold hide-for-mobile'}).text,
@@ -122,7 +122,7 @@ def Scrape_page(x):
     #pass to data frame
     df = pd.DataFrame(F1_list)
     #print(df)
-    df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/Bahrain_2023.csv', index = False)
+    df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/F1_2023.csv', index = False)
 
 # Call functions  
 def main():
