@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup 
-import requests
+import requests 
 import pandas as pd
 import time 
 
@@ -71,6 +71,9 @@ def Scrape_page(x):
     # soup = Set_connection()
     url = f"https://www.formula1.com{x}" 
     response = requests.get(url)
+
+    
+
      # set up html for scraping     
     soup = BeautifulSoup(response.content, 'html.parser')
 
@@ -116,10 +119,10 @@ def Scrape_page(x):
 
     
 
-    # #pass to data frame
-    # df = pd.DataFrame(F1_list)
-    # #print(df)
-    # df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/Bahrain_2023.csv', index = False)
+    #pass to data frame
+    df = pd.DataFrame(F1_list)
+    #print(df)
+    df.to_csv('/Users/robyn/Documents/GitHub/Cpp_Projects/F1_Fantasy_Game/Race data/Bahrain_2023.csv', index = False)
 
 # Call functions  
 def main():
