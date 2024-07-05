@@ -1,18 +1,48 @@
 import mysql.connector
 from mysql.connector import Error
 
-def Welcome():
+def Get_player_name():
     print("**************************************** PLAYER DETAILS ********************************************************\n")
     print("Enter your name and get ready to play!")
     
     playername = input("Enter player name: ")
     print("Your player name is: " + playername + "\n")
 
-    races = input("Choose how many races your wish to play: ")
+    return playername 
+
+def Choose_how_many_races():
+
+    # Choose how many races will be played
+    races = 0
+    while races < 1 or races > 22: 
+        races = int(input("2023 had 22 races. How many do you wish to play? Input whole number: "))
+
+
+    races_int = int(races)
+    races_amount = []
+    for i in range(1, races_int + 1):
+        races_amount.append(i)
+
+    # print(races_amount)
+
+    race_names = ["bahrain", "saudi-arabia", "australia", "azerbaijan", "miami", "monaco", "spain", "canada", "austria", "great-britain", "hungary", "belgium", "netherlands", "italy", "singapore", "japan", "qatar", "united-states", "mexico", "brazil", "las-vegas", "abu-dhabi"]
+    # Using list comprehension to convert each item to uppercase
+    races_uppercase_list = [item.upper() for item in race_names]
+    
+    # Create list for races in this session
+    Races_this_session = []
+    # print races selected
+    print("The races you will compete in are: ")
+    for i in range(0,races):
+        print(races_uppercase_list[i])
+        Races_this_session.append(races_uppercase_list[i])
+
+
+    # print(races_uppercase_list)
     print("\nTIP: For a more challenging game, ignore VER and use only other drivers.\n")
+    return Races_this_session
 
-
-def query_with_variables(Race, Driver, Driver_two):
+def query_with_variables(Count, Driver, Driver_two):
     try:
         # Establish the connection
         connection = mysql.connector.connect(
@@ -29,7 +59,7 @@ def query_with_variables(Race, Driver, Driver_two):
 
             # Use parameterized query
             query = "SELECT Points FROM F1_2023 WHERE (Race_number = %s AND Initials = %s) OR (Race_number = %s AND Initials = %s) "
-            cursor.execute(query, (Race, Driver, Race, Driver_two))
+            cursor.execute(query, (Count, Driver, Count, Driver_two))
 
             # Fetch the results
             rows = cursor.fetchall()
@@ -52,29 +82,27 @@ def query_with_variables(Race, Driver, Driver_two):
 
     return rows
 
-
-def Select_driver():
+def Select_driver(Race, Count):
     if __name__ == "__main__":
         
 
-        # Set variables
-        # Race needs to iterate ++1 - maybe need to pass it, or iterate when we leave this function
-        Race = 1
-        print("********************************************** RACE " + str(Race) + " **********************************************************\n")
+        
+        
+        print("********************************************** " + Race + " **********************************************************\n")
 
         print("Driver options are VER PER ALO SAI HAM STR RUS BOT GAS ALB TSU SAR MAG DEV HUL ZHO NOR OCO LEC PIA\n")
         
         
-
+        # Set variables
         # No duplicate can be allowed. an if loop needed here, also check for correct formatting.
         Driver = "SAME"
         Driver_two = "SAME"
 
         while(Driver == Driver_two):
             print("Please select a different driver for each position. Use the drivers initials exactly as shown above")
-            while(len(Driver) != 3) or (Driver == Driver_two):
+            while(len(Driver) != 3) or (Driver == Driver_two) or Driver != "VER" and Driver != "PER" and Driver != "ALO" and Driver != "SAI" and Driver != "HAM" and Driver != "STR" and Driver != "RUS" and Driver != "BOT" and Driver != "GAS" and Driver != "ALB" and Driver != "TSU" and Driver != "SAR" and Driver != "MAG" and Driver != "DEV" and Driver != "HUL" and Driver != "ZHO" and Driver != "NOR" and Driver != "OCO" and Driver != "LEC" and Driver != "PIA":
                 Driver = input("1st: ")
-            while(len(Driver_two) != 3) or (Driver == Driver_two):
+            while(len(Driver_two) != 3) or (Driver == Driver_two) or Driver_two != "VER" and Driver_two != "PER" and Driver_two != "ALO" and Driver_two != "SAI" and Driver_two != "HAM" and Driver_two != "STR" and Driver_two != "RUS" and Driver_two != "BOT" and Driver_two != "GAS" and Driver_two != "ALB" and Driver_two != "TSU" and Driver_two != "SAR" and Driver_two != "MAG" and Driver_two != "DEV" and Driver_two != "HUL" and Driver_two != "ZHO" and Driver_two != "NOR" and Driver_two != "OCO" and Driver_two != "LEC" and Driver_two != "PIA":
                 Driver_two = input("2nd: ")
 
         Driver = Driver.upper()
@@ -86,15 +114,15 @@ def Select_driver():
         while (Choice != "N" and Choice != 'Y' and Choice != 'n' and Choice != 'y'):
             Choice = input("Enter Y to continue or N to change your selection: ")
         
-        if Choice == 'Y':
+        if Choice == 'Y' or Choice == 'y':
             print(" ")
-        else: Select_driver()
+        else: Select_driver(Race, Count)
         
-        if Choice == 'Y':
+        if Choice == 'Y' or Choice == 'y':
             print(" ")
         else: return
 
-        results = query_with_variables(Race, Driver, Driver_two)
+        results = query_with_variables(Count, Driver, Driver_two)
         
 
     
@@ -104,10 +132,17 @@ def Select_driver():
         print(results)
 
 def main():
-    Welcome()
+    # Player chooses name 
+    player_name = Get_player_name()
+    # Player chooses how many rounds to play
+    race_amount = Choose_how_many_races()
+    # This counts the race number we are currently at.
+    Count = 0
 
-    # run select driver for all races = 22 this time. Update overall score var
-    Select_driver()
+    for i in race_amount:
+        # i is the name of the curent race, count is the race number in the order. 
+        Count += 1
+        Select_driver(i, Count)
     
 
 main()
