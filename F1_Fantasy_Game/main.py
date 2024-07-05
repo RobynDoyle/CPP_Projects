@@ -2,9 +2,14 @@ import mysql.connector
 from mysql.connector import Error
 
 def Welcome():
-    print("*************************************************************************")
+    print("**************************************** PLAYER DETAILS ********************************************************\n")
+    print("Enter your name and get ready to play!")
+    
     playername = input("Enter player name: ")
-    print("Your player name is: " + playername)
+    print("Your player name is: " + playername + "\n")
+
+    races = input("Choose how many races your wish to play: ")
+    print("\nTIP: For a more challenging game, ignore VER and use only other drivers.\n")
 
 
 def query_with_variables(Race, Driver, Driver_two):
@@ -50,19 +55,58 @@ def query_with_variables(Race, Driver, Driver_two):
 
 def Select_driver():
     if __name__ == "__main__":
-        # Set variables
-        Race = 1
-        Driver = input("Enter Driver 1's initials eg. VER: ")
-        Driver_two = input("Enter Driver 2's initials eg. VER: ")
         
+
+        # Set variables
+        # Race needs to iterate ++1 - maybe need to pass it, or iterate when we leave this function
+        Race = 1
+        print("********************************************** RACE " + str(Race) + " **********************************************************\n")
+
+        print("Driver options are VER PER ALO SAI HAM STR RUS BOT GAS ALB TSU SAR MAG DEV HUL ZHO NOR OCO LEC PIA\n")
+        
+        
+
+        # No duplicate can be allowed. an if loop needed here, also check for correct formatting.
+        Driver = "SAME"
+        Driver_two = "SAME"
+
+        while(Driver == Driver_two):
+            print("Please select a different driver for each position. Use the drivers initials exactly as shown above")
+            while(len(Driver) != 3) or (Driver == Driver_two):
+                Driver = input("1st: ")
+            while(len(Driver_two) != 3) or (Driver == Driver_two):
+                Driver_two = input("2nd: ")
+
+        Driver = Driver.upper()
+        Driver_two = Driver_two.upper()
+
+        print("\nYour selection is:\n1st: " + Driver + "\n2nd: " + Driver_two + "\n") 
+
+        Choice = 'X'
+        while (Choice != "N" and Choice != 'Y' and Choice != 'n' and Choice != 'y'):
+            Choice = input("Enter Y to continue or N to change your selection: ")
+        
+        if Choice == 'Y':
+            print(" ")
+        else: Select_driver()
+        
+        if Choice == 'Y':
+            print(" ")
+        else: return
+
         results = query_with_variables(Race, Driver, Driver_two)
-        score = results
+        
+
+    
+            
+
         print("Your score for this weeks race: ")
-        print(score)
+        print(results)
 
 def main():
     Welcome()
 
+    # run select driver for all races = 22 this time. Update overall score var
     Select_driver()
     
 

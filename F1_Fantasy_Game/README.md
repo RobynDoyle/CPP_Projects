@@ -1,7 +1,7 @@
 # F1 Fantasy League Game
 
 
-This game will. 
+This game will.   (MAYBE ADD AN OPTION TO SEE WHO WOULD HAVE WON IF MAX WAS NOT THERE!)
 
 1. Take user input for this weeks race. User will choose top 3 racers.
 2. Programme will scrape info from F1.com and get the results for this weeks race.
