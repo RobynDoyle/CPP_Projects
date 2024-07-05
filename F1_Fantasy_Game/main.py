@@ -42,6 +42,12 @@ def Choose_how_many_races():
     print("\nTIP: For a more challenging game, ignore VER and use only other drivers.\n")
     return Races_this_session
 
+# def sum_tuple(rows):
+#     for row in rows:
+#         print(row)
+    
+#     return sum(row)
+
 def query_with_variables(Count, Driver, Driver_two):
     try:
         # Establish the connection
@@ -53,7 +59,7 @@ def query_with_variables(Count, Driver, Driver_two):
         )
 
         if connection.is_connected():
-            print("Successfully connected to the database")
+            # print("Successfully connected to the database")
             # Create a cursor object
             cursor = connection.cursor()
 
@@ -78,9 +84,14 @@ def query_with_variables(Count, Driver, Driver_two):
         if connection.is_connected():
             # Close the connection
             connection.close()
-            print("MySQL connection is closed")
+            # print("MySQL connection is closed")
+    
+    points_counter = 0
+    for tup in rows:
+        points_counter += sum(tup)
+    
 
-    return rows
+    return points_counter
 
 def Select_driver(Race, Count):
     if __name__ == "__main__":
@@ -124,12 +135,12 @@ def Select_driver(Race, Count):
 
         results = query_with_variables(Count, Driver, Driver_two)
         
+        print("Your score for this weeks race: " + str(results))
+        
 
-    
-            
+        return results
 
-        print("Your score for this weeks race: ")
-        print(results)
+
 
 def main():
     # Player chooses name 
@@ -138,11 +149,20 @@ def main():
     race_amount = Choose_how_many_races()
     # This counts the race number we are currently at.
     Count = 0
+    Overall_score = 0
+    This_race_score  = 0
 
     for i in race_amount:
         # i is the name of the curent race, count is the race number in the order. 
         Count += 1
-        Select_driver(i, Count)
+        This_race_score = Select_driver(i, Count)
+        Overall_score += This_race_score 
+        print("\nYour current overall score is " + str(Overall_score))
+
+    print("\nYour final score is " + str(Overall_score))
+        
+
+    
     
 
 main()
