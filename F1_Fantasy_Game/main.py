@@ -42,12 +42,6 @@ def Choose_how_many_races():
     print("\nTIP: For a more challenging game, ignore VER and use only other drivers.\n")
     return Races_this_session
 
-# def sum_tuple(rows):
-#     for row in rows:
-#         print(row)
-    
-#     return sum(row)
-
 def query_with_variables(Count, Driver, Driver_two):
     try:
         # Establish the connection
@@ -96,9 +90,6 @@ def query_with_variables(Count, Driver, Driver_two):
 def Select_driver(Race, Count):
     if __name__ == "__main__":
         
-
-        
-        
         print("********************************************** " + Race + " **********************************************************\n")
 
         print("Driver options are VER PER ALO SAI HAM STR RUS BOT GAS ALB TSU SAR MAG DEV HUL ZHO NOR OCO LEC PIA\n")
@@ -140,8 +131,6 @@ def Select_driver(Race, Count):
 
         return results
 
-
-
 def main():
     # Player chooses name 
     player_name = Get_player_name()
@@ -161,10 +150,6 @@ def main():
 
     print("\nYour final score is " + str(Overall_score))
         
-
-    
-    
-
 main()
 
 
