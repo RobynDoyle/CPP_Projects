@@ -87,6 +87,46 @@ def query_with_variables(Count, Driver, Driver_two):
 
     return points_counter
 
+def query_for_driver_list():
+    try:
+        # Establish the connection
+        connection = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='P@ssw0rd',
+            database='F1'
+        )
+
+        if connection.is_connected():
+            # print("Successfully connected to the database")
+            # Create a cursor object
+            cursor = connection.cursor()
+
+            # Use parameterized query
+            query = "SELECT Initials FROM F1_2023 WHERE Race_number = 1"
+            cursor.execute(query)
+
+            # Fetch the results
+            rows = cursor.fetchall()
+
+            # Print the results
+            for row in rows:
+                print(row)
+
+            # Close the cursor
+            cursor.close()
+
+    except Error as e:
+        print(f"Error: {e}")
+
+    finally:
+        if connection.is_connected():
+            # Close the connection
+            connection.close()
+            # print("MySQL connection is closed")
+    
+    return rows
+
 def Select_driver(Race, Count):
     if __name__ == "__main__":
         
@@ -94,6 +134,10 @@ def Select_driver(Race, Count):
 
         print("Driver options are VER PER ALO SAI HAM STR RUS BOT GAS ALB TSU SAR MAG DEV HUL ZHO NOR OCO LEC PIA\n")
         
+        # Get list of drivers from the database for this
+        Driver_list = query_for_driver_list()
+
+        print(Driver_list)
         
         # Set variables
         # No duplicate can be allowed. an if loop needed here, also check for correct formatting.
@@ -102,7 +146,10 @@ def Select_driver(Race, Count):
 
         while(Driver == Driver_two):
             print("Please select a different driver for each position. Use the drivers initials exactly as shown above")
-            while(len(Driver) != 3) or (Driver == Driver_two) or Driver != "VER" and Driver != "PER" and Driver != "ALO" and Driver != "SAI" and Driver != "HAM" and Driver != "STR" and Driver != "RUS" and Driver != "BOT" and Driver != "GAS" and Driver != "ALB" and Driver != "TSU" and Driver != "SAR" and Driver != "MAG" and Driver != "DEV" and Driver != "HUL" and Driver != "ZHO" and Driver != "NOR" and Driver != "OCO" and Driver != "LEC" and Driver != "PIA":
+            
+            # while(len(Driver) != 3) or (Driver == Driver_two) or Driver != "VER" and Driver != "PER" and Driver != "ALO" and Driver != "SAI" and Driver != "HAM" and Driver != "STR" and Driver != "RUS" and Driver != "BOT" and Driver != "GAS" and Driver != "ALB" and Driver != "TSU" and Driver != "SAR" and Driver != "MAG" and Driver != "DEV" and Driver != "HUL" and Driver != "ZHO" and Driver != "NOR" and Driver != "OCO" and Driver != "LEC" and Driver != "PIA":
+            while(len(Driver) != 3) or (Driver == Driver_two) and (Driver not in Driver_list):
+               
                 Driver = input("1st: ")
             while(len(Driver_two) != 3) or (Driver == Driver_two) or Driver_two != "VER" and Driver_two != "PER" and Driver_two != "ALO" and Driver_two != "SAI" and Driver_two != "HAM" and Driver_two != "STR" and Driver_two != "RUS" and Driver_two != "BOT" and Driver_two != "GAS" and Driver_two != "ALB" and Driver_two != "TSU" and Driver_two != "SAR" and Driver_two != "MAG" and Driver_two != "DEV" and Driver_two != "HUL" and Driver_two != "ZHO" and Driver_two != "NOR" and Driver_two != "OCO" and Driver_two != "LEC" and Driver_two != "PIA":
                 Driver_two = input("2nd: ")
@@ -117,19 +164,16 @@ def Select_driver(Race, Count):
             Choice = input("Enter Y to continue or N to change your selection: ")
         
         if Choice == 'Y' or Choice == 'y':
-            print(" ")
-        else: Select_driver(Race, Count)
-        
-        if Choice == 'Y' or Choice == 'y':
-            print(" ")
-        else: return
-
-        results = query_with_variables(Count, Driver, Driver_two)
-        
-        print("Your score for this weeks race: " + str(results))
-        
-
+            results = query_with_variables(Count, Driver, Driver_two)
+            print("Your score for this weeks race: " + str(results))
+            
+        else: results= Select_driver(Race, Count)
+        # Return this weeks score
         return results
+        
+        
+
+        
 
 def main():
     # Player chooses name 
@@ -138,8 +182,11 @@ def main():
     race_amount = Choose_how_many_races()
     # This counts the race number we are currently at.
     Count = 0
-    Overall_score = 0
+    #  Counts the score for current race
     This_race_score  = 0
+    # Counts total player score so far
+    Overall_score = 0
+    
 
     for i in race_amount:
         # i is the name of the curent race, count is the race number in the order. 
