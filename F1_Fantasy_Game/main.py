@@ -217,17 +217,17 @@ def AI_Select_driver(Count):
     AI_DRIVER_two = "SAME"
     AI_DRIVER_three = "SAME"
 
-    # randomly picks a driver from list
+    # randomly picks a driver from list - increase number to increase the difficulty
     while (AI_DRIVER_one not in Driver_list): 
-            pick_one = random.randint(0, len(Driver_list))
+            pick_one = random.randint(0, (len(Driver_list)-10))
             AI_DRIVER_one = Driver_list[pick_one]
             AI_DRIVER_one= AI_DRIVER_one.upper()
     while (AI_DRIVER_two not in Driver_list) or (AI_DRIVER_two == AI_DRIVER_one): 
-            pick_two = random.randint(0, len(Driver_list))
+            pick_two = random.randint(0, (len(Driver_list)-10))
             AI_DRIVER_two = Driver_list[pick_two]
             AI_DRIVER_two= AI_DRIVER_two.upper()
     while (AI_DRIVER_three not in Driver_list) or (AI_DRIVER_three == AI_DRIVER_one) or (AI_DRIVER_three == AI_DRIVER_two): 
-            pick_three = random.randint(0, len(Driver_list))
+            pick_three = random.randint(0, (len(Driver_list)-10))
             AI_DRIVER_three = Driver_list[pick_three]
             AI_DRIVER_three= AI_DRIVER_three.upper()
     
