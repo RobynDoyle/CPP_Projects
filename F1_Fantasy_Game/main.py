@@ -152,8 +152,6 @@ def Select_driver(Race, Count):
     if __name__ == "__main__":
         
         print("********************************************** " + Race + " **********************************************************\n")
-
-        #  print("Driver options are VER PER ALO SAI HAM STR RUS BOT GAS ALB TSU SAR MAG DEV HUL ZHO NOR OCO LEC PIA\n")
         
         # Get list of drivers from the database for this
         Driver_list = query_for_driver_list(Count)
@@ -184,8 +182,6 @@ def Select_driver(Race, Count):
             Driver_three = input("3rd: ")
             Driver_three = Driver_three.upper()
 
-        
-
         print("\nYour selection is:\n1st: " + Driver + "\n2nd: " + Driver_two + "\n3rd: " + Driver_three + "\n") 
         
         # allows user to end game now
@@ -194,7 +190,6 @@ def Select_driver(Race, Count):
         while (Choice != 'N' and Choice != 'Y' and Choice != 'n' and Choice != 'y' and Choice != 'E' and Choice != 'e'):
             Choice = input("Enter Y to continue, N to change your selection or E to exit game: ")
             
-        
         if Choice == 'Y' or Choice == 'y' or Choice == 'E' or Choice == 'e':
             print(" ")
             results = query_with_variables(Count, Driver, Driver_two, Driver_three)
@@ -205,10 +200,7 @@ def Select_driver(Race, Count):
         # Else Re run the select driver funciton, and then return the final grade 
         else: results, Choice = Select_driver(Race, Count) 
 
-        # return results, Choice
-        # Return this weeks score
-        
-
+        # Return this weeks score - this is important since if works for the N re select loop as well as the main output!
         return results, Choice
         
 # Houses main programm calls        
