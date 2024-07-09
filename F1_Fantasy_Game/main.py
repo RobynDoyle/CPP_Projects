@@ -1,15 +1,18 @@
 import mysql.connector
 from mysql.connector import Error
 
+# Gets players name for the game.
 def Get_player_name():
     print("**************************************** PLAYER DETAILS ********************************************************\n")
     print("Enter your name and get ready to play!")
     
     playername = input("Enter player name: ")
+    playername = playername.upper()
     print("Your player name is: " + playername + "\n")
 
     return playername 
 
+# Runs the query to the database for race names of this season, after user defines how many are needed
 def Choose_how_many_races():
 
     # Choose how many races will be played
@@ -42,6 +45,7 @@ def Choose_how_many_races():
     print("\nTIP: For a more challenging game, ignore VER and use only other drivers.\n")
     return Races_this_session
 
+# Runs the query to the database for driver data
 def query_with_variables(Count, Driver, Driver_two, Driver_three):
     try:
         # Establish the connection
@@ -183,24 +187,31 @@ def Select_driver(Race, Count):
         
 
         print("\nYour selection is:\n1st: " + Driver + "\n2nd: " + Driver_two + "\n3rd: " + Driver_three + "\n") 
-
-        Choice = 'X'
-        while (Choice != "N" and Choice != 'Y' and Choice != 'n' and Choice != 'y'):
-            Choice = input("Enter Y to continue or N to change your selection: ")
         
-        if Choice == 'Y' or Choice == 'y':
+        # allows user to end game now
+        exit_choice = 'N'
+        Choice = 'X'
+        while (Choice != 'N' and Choice != 'Y' and Choice != 'n' and Choice != 'y' and Choice != 'E' and Choice != 'e'):
+            Choice = input("Enter Y to continue, N to change your selection or E to exit game: ")
+            
+        
+        if Choice == 'Y' or Choice == 'y' or Choice == 'E' or Choice == 'e':
             print(" ")
             results = query_with_variables(Count, Driver, Driver_two, Driver_three)
-            print("Your score for this weeks race: " + str(results))
+            print("Your score for this weeks race: " + str(results)) 
+
+            return results, Choice
+        # else if: Choice == 'E' or 
         # Else Re run the select driver funciton, and then return the final grade 
-        else: results= Select_driver(Race, Count)
+        else: results, Choice = Select_driver(Race, Count) 
+
+        # return results, Choice
         # Return this weeks score
-        return results
-        
         
 
+        return results, Choice
         
-
+# Houses main programm calls        
 def main():
     # Player chooses name 
     player_name = Get_player_name()
@@ -217,11 +228,19 @@ def main():
     for i in race_amount:
         # i is the name of the curent race, count is the race number in the order. 
         Count += 1
-        This_race_score = Select_driver(i, Count)
-        Overall_score += This_race_score 
-        print("\nYour current overall score is " + str(Overall_score))
+        This_race_score, end_game_maybe = Select_driver(i, Count)
+        Overall_score += This_race_score
+        
+        # Overall_score += This_race_score[0] 
+        print("\n" + player_name + "'s current overall score is " + str(Overall_score))
 
-    print("\nYour final score is " + str(Overall_score))
+        # If player chose E then exit game
+        if end_game_maybe == 'E' or end_game_maybe == 'e':
+                break
+        
+
+    print("\n" + player_name + "'s final score is " + str(Overall_score))
+    print("Thank you " + player_name + " for playing!")
         
 main()
 
