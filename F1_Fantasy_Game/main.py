@@ -33,7 +33,7 @@ def Choose_how_many_races():
     race_names = ["bahrain", "saudi-arabia", "australia", "azerbaijan", "miami", "monaco", "spain", "canada", "austria", "great-britain", "hungary", "belgium", "netherlands", "italy", "singapore", "japan", "qatar", "united-states", "mexico", "brazil", "las-vegas", "abu-dhabi"]
     # Using list comprehension to convert each item to uppercase
     races_uppercase_list = [item.upper() for item in race_names]
-    time.sleep(.8)
+    
     # Create list for races in this session
     Races_this_session = []
     # print races selected
@@ -41,13 +41,29 @@ def Choose_how_many_races():
     for i in range(0,races):
         print(races_uppercase_list[i])
         Races_this_session.append(races_uppercase_list[i])
-    time.sleep(.8)
+    
 
     # print(races_uppercase_list)
     print("\nTIP: For a more challenging game, ignore VER and use only other drivers.\n")
     time.sleep(.8)
     return Races_this_session
     
+# Lets player choose from 3 different game modes    
+def Choose_difficulty():
+    
+    Difficulty = " "
+    print("Choose game mode: Hard, Medium, Easy")
+    while Difficulty != "HARD" and Difficulty != "MEDIUM" and Difficulty != "EASY" :
+        Difficulty = input("Difficulty level = ")
+        Difficulty = Difficulty.upper()
+
+    if Difficulty == "HARD":
+        Difficulty_number = 14
+    elif Difficulty == "MEDIUM":
+        Difficulty_number = 10
+    else: Difficulty_number = 6
+
+    return Difficulty_number
 
 # Runs the query to the database for driver data
 def query_with_variables(Count, Driver, Driver_two, Driver_three):
@@ -152,8 +168,6 @@ def query_for_driver_list(Count):
 
     return Driver_clean_list
 
-
-
 # This function gets the player's driver choice and asks the database for the points that the drivers scored
 def Select_driver(Race, Count):
     if __name__ == "__main__":
@@ -207,7 +221,7 @@ def Select_driver(Race, Count):
         # Return this weeks score - this is important since if works for the N re select loop as well as the main output!
         return results, Choice
 
-def AI_Select_driver(Count):
+def AI_Select_driver(Count, Difficulty):
     print("\nAI Choosing drivers....")
 
     Driver_list = query_for_driver_list(Count)
@@ -219,15 +233,15 @@ def AI_Select_driver(Count):
 
     # randomly picks a driver from list - increase number to increase the difficulty
     while (AI_DRIVER_one not in Driver_list): 
-            pick_one = random.randint(0, (len(Driver_list)-10))
+            pick_one = random.randint(0, (len(Driver_list)-Difficulty))
             AI_DRIVER_one = Driver_list[pick_one]
             AI_DRIVER_one= AI_DRIVER_one.upper()
     while (AI_DRIVER_two not in Driver_list) or (AI_DRIVER_two == AI_DRIVER_one): 
-            pick_two = random.randint(0, (len(Driver_list)-10))
+            pick_two = random.randint(0, (len(Driver_list)-Difficulty))
             AI_DRIVER_two = Driver_list[pick_two]
             AI_DRIVER_two= AI_DRIVER_two.upper()
     while (AI_DRIVER_three not in Driver_list) or (AI_DRIVER_three == AI_DRIVER_one) or (AI_DRIVER_three == AI_DRIVER_two): 
-            pick_three = random.randint(0, (len(Driver_list)-10))
+            pick_three = random.randint(0, (len(Driver_list)-Difficulty))
             AI_DRIVER_three = Driver_list[pick_three]
             AI_DRIVER_three= AI_DRIVER_three.upper()
     
@@ -251,6 +265,8 @@ def main():
     player_name = Get_player_name()
     # Player chooses how many rounds to play
     race_amount = Choose_how_many_races()
+    # Choose game difficulty
+    Difficulty = Choose_difficulty()
     # This counts the race number we are currently at.
     Count = 0
     #  Counts the score for current race
@@ -266,7 +282,7 @@ def main():
         Count += 1
         This_race_score, end_game_maybe = Select_driver(i, Count)
         Overall_score += This_race_score
-        AI_race_score = AI_Select_driver(Count)
+        AI_race_score = AI_Select_driver(Count, Difficulty)
         AI_overall_score += AI_race_score
         
         # Overall_score += This_race_score[0] 
