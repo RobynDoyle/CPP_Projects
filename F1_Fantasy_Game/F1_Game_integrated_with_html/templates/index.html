@@ -10,8 +10,8 @@
 
     <h1 class="center-text">F1 LEAGUE 2023</h1>
     <div>
-        <img src="images/F1-Logo.png" alt="F1 Logo" class="top-left-logo">
-        <img src="images/F1-Logo.png" alt="F1 Logo" class="top-right-logo">
+        <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
+        <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
     </div>
 
     <nav class="button-menu">
@@ -30,7 +30,7 @@
         </form>
     </nav>
 
-    <img src="images/2021-Bahrain-GP-start-wide-shot-Photo-Red-Bull.jpg" alt="F1 Cars Photo" class="main-photo">
+    <img src="{{ url_for('static', filename='images/2021-Bahrain-GP-start-wide-shot-Photo-Red-Bull.jpg') }}" alt="F1 Cars Photo" class="main-photo">
 
 </body>
 </html>
