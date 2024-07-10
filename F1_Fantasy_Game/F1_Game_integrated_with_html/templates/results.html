@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1 class="center-text">Race Results for {{ race }}</h1>
+    <p>{{ player_name }}'s score: {{ results }}</p>
+    <p>AI's score: {{ ai_results }}</p>
+    <p>{{ player_name }}'s overall score: {{ overall_score }}</p>
+    <p>AI's overall score: {{ ai_overall_score }}</p>
+
+</body>
+</html>
