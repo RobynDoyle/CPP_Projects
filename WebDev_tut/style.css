@@ -1,3 +1,110 @@
-p{
-    color: blue;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Center text for the entire body */
+}
+.button-menu {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-menu button {
+    background-color: #ff0000; /* Red */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-menu button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.center-text {
+    text-align: center;
+}
+
+.center-text {
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    display: inline-block;
+    margin: 10px;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+img {
+    display: block;
+    margin-left: 1px;
+    margin-right: auto;
+    margin-top: auto;
+}
+
+.top-left-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+}
+
+.top-right-logo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+}
+
+.blue-text {
+    color : blue;
+}
+
+.main-photo {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 1300px; /* Adjust the width as needed */
+    height: 700px; /* Adjust the height as needed */
 }
