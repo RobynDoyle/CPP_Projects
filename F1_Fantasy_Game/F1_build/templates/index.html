@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Fantasy</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- <h1 class="center-text">F1 LEAGUE 2023</h1> -->
+    <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
+    
+    <div>
+        <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
+        <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
+
+    </div>
+    
+    <nav class="button-menu">
+        <button onclick="location.href='Start.html'">Start Game</button>
+        <button onclick="location.href='Scores.html'">Scores</button>
+        <button onclick="location.href='About.html'">About</button>
+    </nav>
+
+    <img src="{{ url_for('static', filename='images/ferrari-sf-23.jpg') }}" alt="F1 Cars Photo" class="main-photo" >
+
+
+
+    <p class = "credit">This is an educational project by Robyn Doyle</p>
+    <script src="{{ url_for('static', filename='js/color-changer.js') }}"></script>
+
+</body>
+</html>
