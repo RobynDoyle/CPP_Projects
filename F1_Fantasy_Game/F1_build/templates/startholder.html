@@ -1,18 +1,37 @@
+<!-- templates/base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Fantasy</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+    </style>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
+    {% block content %}{% endblock %}
     <h1 class="center-text">F1 LEAGUE 2023</h1>
     <div>
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
     </div>
+    <!-- Audio player -->
+    <audio id="myAudio" autoplay loop>
+        <source src="{{ url_for('static', filename='music/Music.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
     <nav class="button-menu">
         <form action="{{ url_for('start') }}" method="POST">
@@ -32,5 +51,21 @@
 
     <img src="{{ url_for('static', filename='images/2021-Bahrain-GP-start-wide-shot-Photo-Red-Bull.jpg') }}" alt="F1 Cars Photo" class="main-photo">
 
+
+    <!-- JavaScript to control audio playback -->
+    <script>
+        const audio = document.getElementById('myAudio');
+
+        // Ensure audio continues playing when navigating between pages
+        window.addEventListener('beforeunload', function () {
+            audio.pause();
+        });
+
+        // Resume audio playback on page load
+        window.addEventListener('load', function () {
+            audio.play();
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/color-changer.js') }}"></script>
 </body>
 </html>

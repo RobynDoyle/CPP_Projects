@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Fantasy</title>
-    <!-- Link to external CSS file -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-
-    <!-- <h1 class="center-text">F1 LEAGUE 2023</h1> -->
+{% extends "base.html" %}
+{% block title %}Music Player{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<div class="container">
     <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
     
     <div>
@@ -19,46 +12,36 @@
     </div>
     
     <nav class="button-menu">
-        <button onclick="location.href='Start.html'">Start Game</button>
+        <button onclick="location.href='{{ url_for('start') }}'">Start Game</button>
         <button onclick="location.href='Scores.html'">Scores</button>
         <button onclick="location.href='About.html'">About</button>
+        <button onclick="toggleAudio()">Music</button>
+        
     </nav>
 
+    
+</div>
 
-    <div class="controls">
-        <button onclick="toggleAudio()">Music</button>
-    </div>
-
-    <audio id="myAudio" autoplay loop>
-        <source src="{{ url_for('static', filename='music/Music.mp3') }}" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+<img src="{{ url_for('static', filename='images/ferrari-sf-23.jpg') }}" alt="F1 Cars Photo" class="main-photo" >
 
 
 
-    <img src="{{ url_for('static', filename='images/ferrari-sf-23.jpg') }}" alt="F1 Cars Photo" class="main-photo" >
+<p class = "credit">This is an educational project by Robyn Doyle</p>
+<script src="{{ url_for('static', filename='js/color-changer.js') }}"></script>
 
+<script>
+    
 
-
-    <p class = "credit">This is an educational project by Robyn Doyle</p>
-    <script src="{{ url_for('static', filename='js/color-changer.js') }}"></script>
-    <!-- <script src="{{ url_for('static', filename='js/music_player.js') }}"></script> -->
-
-    <script>
-        const audio = document.getElementById('myAudio');
-
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        }
-        // Start playing audio on page load (if allowed by browser)
-        window.addEventListener('load', function() {
-            audio.play();
-        });
-    </script>
-
-</body>
-</html>
+function toggleAudio() {
+    if (audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
+// Start playing audio on page load (if allowed by browser)
+window.addEventListener('load', function() {
+    audio.play();
+});
+</script>
+{% endblock %}

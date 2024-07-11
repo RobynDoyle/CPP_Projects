@@ -9,11 +9,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('music.html')
+    return render_template('index.html')
 
-@app.route('/start', methods=['POST'])
+@app.route('/start')
 def start():
-    return "BOB wins!"
+    return render_template('start.html')
 
 # app.run(host="0.0.0.0", port=80)
 
