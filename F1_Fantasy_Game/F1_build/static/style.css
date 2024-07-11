@@ -163,3 +163,23 @@ img {
     padding: 10px; /* Adjust padding */
 }
 
+.container {
+    margin-top: 10px;
+}
+.controls {
+    margin-top: 20px;
+}
+
+.controls button {
+    font-size: 18px; /* Adjust font size */
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #ff0000; /* Button background color */
+    color: white; /* Button text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.controls button:hover {
+    background-color: #45a049; /* Hover state background color */
+}

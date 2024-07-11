@@ -1,0 +1,45 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}{% endblock %}
+
+    <!-- Audio player -->
+    <audio id="myAudio" autoplay loop>
+        <source src="{{ url_for('static', filename='music/Music.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- JavaScript to control audio playback -->
+    <script>
+        const audio = document.getElementById('myAudio');
+
+        // Ensure audio continues playing when navigating between pages
+        window.addEventListener('beforeunload', function () {
+            audio.pause();
+        });
+
+        // Resume audio playback on page load
+        window.addEventListener('load', function () {
+            audio.play();
+        });
+    </script>
+</body>
+</html>
