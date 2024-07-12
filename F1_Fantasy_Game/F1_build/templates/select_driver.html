@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Music Player{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Driver</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
+    <div>
+        <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
+        <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
+    </div>
+  
+
+    <h2 class="center-text">Select Drivers for {{ race }}</h2>
+    <form action="{{ url_for('start') }}" method="POST">
+        <input type="hidden" name="race" value="{{ race }}">
+        <input type="hidden" name="count" value="{{ count }}">
+        <label for="driver">1st:</label>
+        <select id="driver" name="driver" required>
+            {% for driver in driver_list %}
+                <option value="{{ driver }}">{{ driver }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="driver_two">2nd:</label>
+        <select id="driver_two" name="driver_two" required>
+            {% for driver in driver_list %}
+                <option value="{{ driver }}">{{ driver }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="driver_three">3rd:</label>
+        <select id="driver_three" name="driver_three" required>
+            {% for driver in driver_list %}
+                <option value="{{ driver }}">{{ driver }}</option>
+            {% endfor %}
+        </select><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
+{% endblock %}

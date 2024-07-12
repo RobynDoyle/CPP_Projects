@@ -20,11 +20,7 @@
     right: 10px;
     width: 30%;
 }
-.button-menu {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+
 .main-photo {
     display: block;
     margin-left: auto;
@@ -191,4 +187,32 @@ img {
 }
 .controls button:hover {
     background-color: #45a049; /* Hover state background color */
+}
+
+.music-icon {
+    font-size: 24px;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: #ff0000;
+}
+.music-icon:hover {
+    color: #0056b3;
+}
+
+.home-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.home-button i {
+    font-size: 24px;
+    color: #ff0000;;
+}
+.home-button i:hover {
+    color: #0056b3;
 }

@@ -1,9 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Music Player{% endblock %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
+    <title></title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,22 +21,23 @@
     </style>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
-    {% block content %}{% endblock %}
+    
     <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
     <div>
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
     </div>
-    <!-- Audio player -->
-    <audio id="myAudio" autoplay loop>
-        <source src="{{ url_for('static', filename='music/Music.mp3') }}" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+  
+  
+  
+     
+
 
     <nav class="button-menu">
-        <form action="{{ url_for('start') }}" method="POST">
+        <form action="{{ url_for('select_driver') }}" method="POST">
             <label for="player_name" class="font">Enter your name:</label>
             <input type="text" id="player_name" name="player_name" required><br><br>
             <label for="races" class="font">Number of races:</label>
@@ -44,7 +48,8 @@
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
             </select><br><br>
-            <button type="submit">Start Game</button>
+            <button type="submit">Race</button>
+
             
 
             
@@ -54,20 +59,8 @@
     <img src="{{ url_for('static', filename='images/redbull.jpeg') }}" alt="F1 Cars Photo" class="second-photo">
     <p class = "credit">This is an educational project by Robyn Doyle</p>
 
-    <!-- JavaScript to control audio playback -->
-    <script>
-        const audio = document.getElementById('myAudio');
-
-        // Ensure audio continues playing when navigating between pages
-        window.addEventListener('beforeunload', function () {
-            audio.pause();
-        });
-
-        // Resume audio playback on page load
-        window.addEventListener('load', function () {
-            audio.play();
-        });
-    </script>
-    <script src="{{ url_for('static', filename='js/color-changer.js') }}"></script>
+ 
+    
 </body>
 </html>
+{% endblock %}

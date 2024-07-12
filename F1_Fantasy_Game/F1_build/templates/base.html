@@ -19,34 +19,25 @@
     </style>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
     {% block content %}{% endblock %}
-    <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
-    <div>
-        <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
-        <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
-    </div>
+   
+    <i class="fas fa-music music-icon" id="musicIcon"></i>
     <!-- Audio player -->
-    <audio id="myAudio" autoplay loop>
-        <source src="{{ url_for('static', filename='music/Music.mp3') }}" type="audio/mpeg">
+    <audio id="myAudio" loop>
+        <source src="{{ url_for('static', filename='music/Music_r.mp3') }}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-    <!-- JavaScript to control audio playback -->
-    <script>
-        const audio = document.getElementById('myAudio');
-
-        // Ensure audio continues playing when navigating between pages
-        window.addEventListener('beforeunload', function () {
-            audio.pause();
-        });
-
-        // Resume audio playback on page load
-        window.addEventListener('load', function () {
-            audio.play();
-        });
-    </script>
+    <button type="button" class="home-button" onclick="location.href='{{ url_for('home') }}'">
+        <i class="fas fa-home"></i>
+    </button>
+    
     <script src="{{ url_for('static', filename='js/color-changer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/music_list.js') }}"></script>
+
 </body>
 </html>
