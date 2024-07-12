@@ -23,6 +23,7 @@
 
 </head>
 <body>
+
     {% block content %}{% endblock %}
    
     <i class="fas fa-music music-icon" id="musicIcon"></i>
@@ -35,9 +36,12 @@
     <button type="button" class="home-button" onclick="location.href='{{ url_for('home') }}'">
         <i class="fas fa-home"></i>
     </button>
-    
+
     <script src="{{ url_for('static', filename='js/color-changer.js') }}"></script>
     <script src="{{ url_for('static', filename='js/music_list.js') }}"></script>
+
+   
+
 
 </body>
 </html>
