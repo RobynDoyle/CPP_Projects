@@ -170,6 +170,20 @@ img {
     padding: 10px; /* Adjust padding */
 }
 
+.credit-two{
+    /* top: 1000px; */
+    /* bottom: 10px; */
+    color: white;
+    position: absolute;
+    top: 100%; /* Adjust vertical positioning */
+    left: 50%; /* Adjust horizontal positioning */
+    transform: translate(-50%, -50%);
+    font-size: 24px; /* Adjust font size */
+    text-align: center; /* Center align text */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 10px; Adjust padding
+}
+
 .container {
     margin-top: 10px;
 }
@@ -213,7 +227,7 @@ img {
 }
 .home-button i {
     font-size: 24px;
-    color: #ffffff;;
+    color: #ffffff;
 }
 .home-button i:hover {
     color: #45a049;
@@ -224,3 +238,34 @@ img {
                 top: 10px;
                 right: 10px;
             } */
+
+.player-info-left_one {
+    position: absolute;
+    top: 170px; /* Adjust the value to your preference */
+    left: 10px; /* Adjust the value to your preference */
+    text-align: left;
+    font-size: 24px; /* Adjust the value to your preference */
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+.player-info-left_two {
+    position: absolute;
+    top: 210px; /* Adjust the value to your preference */
+    left: 10px; /* Adjust the value to your preference */
+    text-align: left;
+    font-size: 24px; /* Adjust the value to your preference */
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+.player-info-left_three {
+    position: absolute;
+    top: 250px; /* Adjust the value to your preference */
+    left: 10px; /* Adjust the value to your preference */
+    text-align: left;
+    font-size: 24px; /* Adjust the value to your preference */
+    margin: 0;
+    padding: 0;
+    color: white;
+}

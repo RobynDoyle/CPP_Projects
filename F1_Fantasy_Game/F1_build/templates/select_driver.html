@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Music Player{% endblock %}
+{% block title %}F1 - Choose Drivers{% endblock %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    
 
     <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
     <div>
@@ -19,7 +20,7 @@
   
 
     <h2 class="center-text">Select Drivers for {{ race }}</h2>
-    <form action="{{ url_for('start') }}" method="POST">
+    <form action="{{ url_for('select_driver') }}" method="POST">
         <input type="hidden" name="race" value="{{ race }}">
         <input type="hidden" name="count" value="{{ count }}">
         <label for="driver">1st:</label>
@@ -44,7 +45,16 @@
     </form>
     <img src="{{ url_for('static', filename='images/night.jpg') }}" alt="F1 track night" class="second-photo">
     <p class = "credit">This is an educational project by Robyn Doyle</p>
+    <!-- <p class="credit-two">bob</p> -->
 
+    <!-- {% if player_name %} -->
+    
+    {% if player_name %}
+        <p class="player-info-left_one">Player: {{ player_name }}</p>
+        <p class="player-info-left_two"> No. of races: {{ races }}</p>
+        <p class="player-info-left_three">Difficulty: {{ difficulty }}</p>
+    {% endif %}
+    <!-- {% endif %} -->
 
 </body>
 </html>

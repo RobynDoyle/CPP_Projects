@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Music Player{% endblock %}
+{% block title %}F1 - Start{% endblock %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -33,20 +33,20 @@
   
   
   
-     
+    <!-- {{ url_for('start') }} -->
 
 
     <nav class="button-menu">
-        <form action="{{ url_for('select_driver') }}" method="POST">
+        <form action="{{ url_for('start') }}" method="POST">
             <label for="player_name" class="font">Enter your name:</label>
             <input type="text" id="player_name" name="player_name" required><br><br>
             <label for="races" class="font">Number of races:</label>
             <input type="number" id="races" name="races" min="1" max="22" required><br><br>
             <label for="difficulty" class="font">Choose difficulty:</label>
             <select id="difficulty" name="difficulty" required>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
+                <option value="EASY">Easy</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HARD">Hard</option>
             </select><br><br>
             <button type="submit">Race</button>
 
@@ -56,10 +56,15 @@
         </form>
     </nav>
 
-    <img src="{{ url_for('static', filename='images/redbull.jpeg') }}" alt="F1 Cars Photo" class="second-photo">
-    <p class = "credit">This is an educational project by Robyn Doyle</p>
 
- 
+    <img src="{{ url_for('static', filename='images/redbull.jpeg') }}" alt="F1 Cars Photo" class="second-photo">
+    
+    
+    <p class = "credit">This is an educational project by Robyn Doyle {{ player_name }}</p>
+
+    {% if player_name %}
+    <p class="credit-two">Welcome, {{ player_name }}!</p>
+    {% endif %}
     
 </body>
 </html>
