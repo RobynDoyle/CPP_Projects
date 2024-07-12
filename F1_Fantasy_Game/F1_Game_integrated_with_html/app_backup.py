@@ -15,6 +15,8 @@ def Choose_how_many_races(races):
     races_amount = [i for i in range(1, races_int + 1)]
     race_names = ["bahrain", "saudi-arabia", "australia", "azerbaijan", "miami", "monaco", "spain", "canada", "austria", "great-britain", "hungary", "belgium", "netherlands", "italy", "singapore", "japan", "qatar", "united-states", "mexico", "brazil", "las-vegas", "abu-dhabi"]
     races_uppercase_list = [item.upper() for item in race_names]
+
+    
     Races_this_session = races_uppercase_list[:races]
     return Races_this_session
 
