@@ -33,6 +33,59 @@ def get_current_race_picture(race_counter):
 
 
 
+def query_with_variables(Count, Driver, Driver_two, Driver_three):
+    try:
+        connection = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='P@ssw0rd',
+            database='F1'
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            query = "SELECT Points FROM F1_2023 WHERE (Race_number = %s AND Initials = %s) OR (Race_number = %s AND Initials = %s) OR (Race_number = %s AND Initials = %s) "
+            cursor.execute(query, (Count, Driver, Count, Driver_two, Count, Driver_three))
+            rows = cursor.fetchall()
+            cursor.close()
+    except Error as e:
+        print(f"Error: {e}")
+    finally:
+        if connection.is_connected():
+            connection.close()
+    points_counter = 0
+    for tup in rows:
+        points_counter += sum(tup)
+    return points_counter
+
+def query_for_driver_list(Race_counter):
+    try:
+        connection = mysql.connector.connect(
+            host='127.0.0.1',
+            user='root',
+            password='P@ssw0rd',
+            database='F1'
+        )
+        if connection.is_connected():
+            cursor = connection.cursor()
+            query = "SELECT Initials FROM F1_2023 WHERE (Race_number = %s)"
+            cursor.execute(query, (Race_counter+1,))
+            driver_list_out = cursor.fetchall()
+            cursor.close()
+    except Error as e:
+        print(f"Error: {e}")
+    finally:
+        if connection.is_connected():
+            connection.close()
+    Driver_clean_list = [driver[0] for driver in driver_list_out]
+    return Driver_clean_list
+
+def Select_driver(Race_counter):
+    Driver_list = query_for_driver_list(Race_counter)
+    return Driver_list
+
+    
+# ________________________________________FLASK PART_____________________________________________________________
+
 @app.route('/')
 def home():
     
@@ -56,16 +109,17 @@ def select_driver():
     # race_counter = request.args.get('race_counter')
     race_counter = request.args.get('race_counter', type=int)
     races = request.args.get('races', type = int)
+    player_name = request.args.get('player_name') #Shows playername
+    difficulty = request.args.get('difficulty') #Outputs chose difficulty of this sesion
     
-    while race_counter < races:
+    while race_counter < races: #This runs for number of races for this session - Page refreshed each iteration
+        current_race = get_current_race(races, race_counter) #Gets name of current race
+        driver_list = Select_driver(race_counter)
+        this_race_picture = get_current_race_picture(race_counter) #Gets different picture for each race
         
-        player_name = request.args.get('player_name')
-        
-        current_race = get_current_race(races, race_counter)
-        this_race_picture = get_current_race_picture(race_counter)
-        race_counter += 1
-        difficulty = request.args.get('difficulty')
-        return render_template('select_driver.html', player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture)
+        race_counter += 1 #Iterates for the next race
+    
+        return render_template('select_driver.html', player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
 
 # app.run(host="0.0.0.0", port=80)
 
