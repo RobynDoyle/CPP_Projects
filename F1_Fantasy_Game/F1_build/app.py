@@ -16,12 +16,21 @@ def get_current_race(races, race_counter):
     races_uppercase_list = [item.upper() for item in race_names]
 
     Races_this_session = []
+    
+    
 
-    for i in range(0,races):
+    for i in range(0,int(races)):
         Races_this_session.append(races_uppercase_list[i])
 
     current_race = Races_this_session[race_counter]
     return current_race
+
+def get_current_race_picture(race_counter):
+    Races_picture = list(range(22))
+    path_to_pic = url_for('static', filename=f'images/{Races_picture[race_counter]}.jpg')
+    this_race_picture = path_to_pic
+    return this_race_picture
+
 
 
 @app.route('/')
@@ -44,16 +53,19 @@ def start():
     
 @app.route('/select_driver', methods=['GET'])
 def select_driver():
-    race_counter = request.args.get('race_counter')
-    races = request.args.get('races')
+    # race_counter = request.args.get('race_counter')
+    race_counter = request.args.get('race_counter', type=int)
+    races = request.args.get('races', type = int)
     
     while race_counter < races:
-        race_counter += 1
+        
         player_name = request.args.get('player_name')
         
         current_race = get_current_race(races, race_counter)
+        this_race_picture = get_current_race_picture(race_counter)
+        race_counter += 1
         difficulty = request.args.get('difficulty')
-        return render_template('select_driver.html', player_name=player_name, races=races, difficulty=difficulty,  current_race=current_race)
+        return render_template('select_driver.html', player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture)
 
 # app.run(host="0.0.0.0", port=80)
 
