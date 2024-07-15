@@ -23,10 +23,11 @@
 
     <form action="{{ url_for('select_driver') }}" class="race_form" method="POST">
         <input type="hidden" name="race" value="{{ race }}">
-        <input type="hidden" name="count" value="{{ count }}">
+        <input type="hidden" name="race_counter" value="{{ race_counter }}">
         <div class="form-group">
             <label for="driver">1st:</label>
             <select id="driver" name="driver" required>
+                <option disabled selected value="">1st</option>
                 {% for driver in driver_list %}
                     <option value="{{ driver }}">{{ driver }}</option>
                 {% endfor %}
@@ -35,6 +36,7 @@
         <div class="form-group">
             <label for="driver_two">2nd:</label>
             <select id="driver_two" name="driver_two" required>
+                <option disabled selected value="">2nd</option>
                 {% for driver in driver_list %}
                     <option value="{{ driver }}">{{ driver }}</option>
                 {% endfor %}
@@ -43,13 +45,14 @@
         <div class="form-group">
             <label for="driver_three">3rd:</label>
             <select id="driver_three" name="driver_three" required>
+                <option disabled selected value="">3rd</option>
                 {% for driver in driver_list %}
                     <option value="{{ driver }}">{{ driver }}</option>
                 {% endfor %}
             </select>
         </div>
-        <button onclick="location.href= {{ url_for('start') }}" class="submit-button">Submit</button>
-    
+        <!-- <button onclick="location.href= {{ url_for('start') }}" class="submit-button">Submit</button> -->
+        <button type="submit" class="submit-button">Submit</button>
     </form>
     <!-- <img src="{{ url_for('static', filename='images/0.jpg') }}" alt="F1 track night" class="second-photo"> -->
     <img src="{{ this_race_picture }}" alt="F1 track night" class="second-photo">
@@ -59,7 +62,7 @@
     <!-- {% if player_name %} -->
     
     {% if player_name %}
-        <p class="player-info-left_one">Player: {{ player_name }}</p>
+        <p class="player-info-left_one">Player: {{ player_name }} and Number of races {{ race_counter }}</p>
         <p class="player-info-left_two"> No. of races: {{ races }}</p>
         <p class="player-info-left_three">Difficulty: {{ difficulty }}</p>
     {% endif %}
