@@ -21,28 +21,35 @@
 
     <h2 class="center-text">Select Drivers for {{ current_race }}</h2>
 
-    <form action="{{ url_for('select_driver') }}" method="POST">
+    <form action="{{ url_for('select_driver') }}" class="race_form" method="POST">
         <input type="hidden" name="race" value="{{ race }}">
         <input type="hidden" name="count" value="{{ count }}">
-        <label for="driver">1st:</label>
-        <select id="driver" name="driver" required>
-            {% for driver in driver_list %}
-                <option value="{{ driver }}">{{ driver }}</option>
-            {% endfor %}
-        </select><br><br>
-        <label for="driver_two">2nd:</label>
-        <select id="driver_two" name="driver_two" required>
-            {% for driver in driver_list %}
-                <option value="{{ driver }}">{{ driver }}</option>
-            {% endfor %}
-        </select><br><br>
-        <label for="driver_three">3rd:</label>
-        <select id="driver_three" name="driver_three" required>
-            {% for driver in driver_list %}
-                <option value="{{ driver }}">{{ driver }}</option>
-            {% endfor %}
-        </select><br><br>
-        <button type="submit">Submit</button>
+        <div class="form-group">
+            <label for="driver">1st:</label>
+            <select id="driver" name="driver" required>
+                {% for driver in driver_list %}
+                    <option value="{{ driver }}">{{ driver }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="driver_two">2nd:</label>
+            <select id="driver_two" name="driver_two" required>
+                {% for driver in driver_list %}
+                    <option value="{{ driver }}">{{ driver }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="driver_three">3rd:</label>
+            <select id="driver_three" name="driver_three" required>
+                {% for driver in driver_list %}
+                    <option value="{{ driver }}">{{ driver }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button onclick="location.href= {{ url_for('start') }}" class="submit-button">Submit</button>
+    
     </form>
     <!-- <img src="{{ url_for('static', filename='images/0.jpg') }}" alt="F1 track night" class="second-photo"> -->
     <img src="{{ this_race_picture }}" alt="F1 track night" class="second-photo">
@@ -57,7 +64,7 @@
         <p class="player-info-left_three">Difficulty: {{ difficulty }}</p>
     {% endif %}
     <!-- {% endif %} -->
-
+    <script src="{{ url_for('static', filename='js/driver-select-restraint.js') }}"></script>
 </body>
 </html>
 {% endblock %}

@@ -10,6 +10,7 @@ import random
 
 app = Flask(__name__)
 
+
 def get_current_race(races, race_counter):
     
     race_names = ["bahrain", "saudi-arabia", "australia", "azerbaijan", "miami", "monaco", "spain", "canada", "austria", "great-britain", "hungary", "belgium", "netherlands", "italy", "singapore", "japan", "qatar", "united-states", "mexico", "brazil", "las-vegas", "abu-dhabi"]
@@ -17,8 +18,6 @@ def get_current_race(races, race_counter):
 
     Races_this_session = []
     
-    
-
     for i in range(0,int(races)):
         Races_this_session.append(races_uppercase_list[i])
 
@@ -104,22 +103,42 @@ def start():
     return render_template('start.html')
 
     
-@app.route('/select_driver', methods=['GET'])
+@app.route('/select_driver', methods=['GET', 'POST'])
 def select_driver():
-    # race_counter = request.args.get('race_counter')
-    race_counter = request.args.get('race_counter', type=int)
+    
+    race_counter = request.args.get('race_counter', 0, type=int)
     races = request.args.get('races', type = int)
     player_name = request.args.get('player_name') #Shows playername
-    difficulty = request.args.get('difficulty') #Outputs chose difficulty of this sesion
+    difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
     
-    while race_counter < races: #This runs for number of races for this session - Page refreshed each iteration
-        current_race = get_current_race(races, race_counter) #Gets name of current race
-        driver_list = Select_driver(race_counter)
-        this_race_picture = get_current_race_picture(race_counter) #Gets different picture for each race
+    # if race_counter < races: #This runs for number of races for this session - Page refreshed each iteration
+    if request.method == 'POST':
+        # Increment race_counter for each POST request
+      
         
-        race_counter += 1 #Iterates for the next race
+        if races is None:
+            races = 5
+
+        race_counter += 1
+
+        if race_counter >= races:  # Check if race_counter reaches the number of races
+            return render_template('result.html', player_name=player_name, races=races, difficulty=difficulty)
+
+        # Pass incremented race_counter and other data for the next race
+        return redirect(url_for('select_driver', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty))
+        
+        
     
-        return render_template('select_driver.html', player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
+    driver_list = Select_driver(race_counter)
+    current_race = get_current_race(races, race_counter) #Gets name of current race
+    
+    this_race_picture = get_current_race_picture(race_counter) #Gets different picture for each race
+    
+    
+    # race_counter += 1 #Iterates for the next race
+
+    return render_template('select_driver.html', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
+    # else: return render_template('end_game.html')
 
 # app.run(host="0.0.0.0", port=80)
 
