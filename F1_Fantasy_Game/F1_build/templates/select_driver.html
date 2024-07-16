@@ -21,11 +21,10 @@
 
     <h2 class="center-text">Select Drivers for {{ current_race }}</h2>
 
-    <form action="{{ url_for('result') }}" class="race_form" method="POST">
+    <form action="{{ url_for('ai') }}" class="race_form" method="POST">
         <input type="hidden" name="player_name" value="{{ player_name }}">
         <input type="hidden" name="difficulty" value="{{ difficulty }}">
         <input type="hidden" name="races" value="{{ races }}">
-        <!-- <input type="hidden" name="races" value="{{ races }}"> -->
         <input type="hidden" name="race_counter" value="{{ race_counter }}">
         <div class="form-group">
             <label for="driver">1st:</label>
@@ -66,7 +65,7 @@
     
 
     <p class="player-info-left_one">Player: {{ player_name }} </p>
-    <p class="player-info-left_two"> Races: {{ race_counter }} of {{ races }} </p>
+    <p class="player-info-left_two"> Races: {{ race_counter+1 }} of {{ races }} </p>
     <p class="player-info-left_three">Difficulty: {{ difficulty }}</p>
    
     

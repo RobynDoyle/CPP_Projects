@@ -146,6 +146,28 @@ def select_driver():
     
     # else: return render_template('end_game.html')
 
+@app.route('/ai', methods=['GET', 'POST'])
+def ai():
+    if request.method == 'GET':
+        race_counter = request.args.get('race_counter', type=int)
+        races = request.args.get('races', type = int)
+        player_name = request.args.get('player_name') #Shows playername
+        difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
+    elif request.method == 'POST':
+        race_counter = request.form.get('race_counter', type=int)
+        races = request.form.get('races', type=int)
+        player_name = request.form.get('player_name')
+        difficulty = request.form.get('difficulty')
+    
+    total_races = []
+    total_races += total_racesz()
+    driver_list = Select_driver(race_counter)
+    
+    current_race = get_current_race(races, race_counter, total_races) #Gets name of current race
+    
+    this_race_picture = get_current_race_picture(race_counter) #Gets different picture for each race
+    return render_template('ai.html', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
+
 @app.route('/result', methods=['GET', 'POST'])
 def result():
     if request.method == 'GET':
