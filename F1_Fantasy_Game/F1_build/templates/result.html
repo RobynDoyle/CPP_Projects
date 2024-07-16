@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Driver</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
     
@@ -20,7 +21,37 @@
   
 
     <h2 class="center-text">RACE RESULTS</h2>
+    <div>
+        <h4 class="font">Driver Finishing Positions</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Driver</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for driver in driver_list %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ driver }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
 
+    <img src="{{ this_race_picture }}" alt="F1 track night" class="second-photo">
+    <p class = "credit">This is an educational project by Robyn Doyle</p>
+    <!-- <p class="credit-two">bob</p> -->
+
+   
+    
+
+    <p class="player-info-left_one">Player: {{ player_name }} </p>
+    <p class="player-info-left_two"> Races: {{ race_counter }} of {{ races }} </p>
+    <p class="player-info-left_three">Difficulty: {{ difficulty }}</p>
 </body>
 </html>
 {% endblock %}

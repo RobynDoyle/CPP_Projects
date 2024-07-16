@@ -96,7 +96,7 @@ def start():
     
 
     race_counter = 0
-    races = 0
+    
     if request.method == 'POST':
         player_name = request.form['player_name'].upper()
         # player_name = 
@@ -113,31 +113,25 @@ def select_driver():
     if request.method == 'GET':
         race_counter = request.args.get('race_counter', type=int)
         races = request.args.get('races', type = int)
-    # race_counter = 0
-    if request.method == 'POST':
+        player_name = request.args.get('player_name') #Shows playername
+        difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
+    elif request.method == 'POST':
         race_counter = request.form.get('race_counter', type=int)
-        races = request.form.get('races', type = int)
-        races = request.args.get('races', type = int)
+        races = request.form.get('races', type=int)
+        player_name = request.form.get('player_name')
+        difficulty = request.form.get('difficulty')
+        
     
-    player_name = request.args.get('player_name') #Shows playername
-    difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
+  
     total_races = []
     total_races += total_racesz()
     
-    # # if race_counter < races: #This runs for number of races for this session - Page refreshed each iteration
-    # if request.method == 'POST':
-    #     # Increment race_counter for each POST request
-    #     race_counter = request.form.get('race_counter', type=int) + 1
-    #     races = request.form.get('races', type = int)
+    
 
-    #     if race_counter >= races:  # Check if race_counter reaches the number of races
-    #         return render_template('result.html', player_name=player_name, races=races, difficulty=difficulty)
+    if race_counter >= races:  # Check if race_counter reaches the number of races
+        return render_template('end.html', player_name=player_name, races=races, difficulty=difficulty)
 
-    #     # Pass incremented race_counter and other data for the next race
-    #     return redirect(url_for('select_driver', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty))
-    # amount_races = list(range(races))    
-        
-    races = 22
+
     driver_list = Select_driver(race_counter)
     
     current_race = get_current_race(races, race_counter, total_races) #Gets name of current race
@@ -146,11 +140,35 @@ def select_driver():
     
     
     # race_counter += 1 #Iterates for the next race
-    race_counter += 1
+    
     return render_template('select_driver.html', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
    
     
     # else: return render_template('end_game.html')
+
+@app.route('/result', methods=['GET', 'POST'])
+def result():
+    if request.method == 'GET':
+        race_counter = request.args.get('race_counter', type=int)
+        races = request.args.get('races', type = int)
+        player_name = request.args.get('player_name') #Shows playername
+        difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
+    elif request.method == 'POST':
+        race_counter = request.form.get('race_counter', type=int)
+        races = request.form.get('races', type=int)
+        player_name = request.form.get('player_name')
+        difficulty = request.form.get('difficulty')
+    
+    total_races = []
+    total_races += total_racesz()
+    driver_list = Select_driver(race_counter)
+    
+    current_race = get_current_race(races, race_counter, total_races) #Gets name of current race
+    
+    this_race_picture = get_current_race_picture(race_counter) #Gets different picture for each race
+    race_counter += 1
+    return render_template('result.html', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
+
 
 # app.run(host="0.0.0.0", port=80)
 
