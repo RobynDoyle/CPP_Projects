@@ -21,7 +21,7 @@
 
     <h2 class="center-text">Select Drivers for {{ current_race }}</h2>
 
-    <form action="{{ url_for('select_driver') }}" class="race_form" method="POST">
+    <form action="{{ url_for('ai') }}" class="race_form" method="POST">
         <input type="hidden" name="player_name" value="{{ player_name }}">
         <input type="hidden" name="difficulty" value="{{ difficulty }}">
         <input type="hidden" name="points" value="{{ points }}">

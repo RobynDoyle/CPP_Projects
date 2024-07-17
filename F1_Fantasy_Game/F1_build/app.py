@@ -34,6 +34,8 @@ def get_current_race_picture(race_counter):
 
 
 def query_with_variables(race_counter, Driver, Driver_two, Driver_three):
+  
+
     try:
         connection = mysql.connector.connect(
             host='127.0.0.1',
@@ -44,7 +46,7 @@ def query_with_variables(race_counter, Driver, Driver_two, Driver_three):
         if connection.is_connected():
             cursor = connection.cursor()
             query = "SELECT Points FROM F1_2023 WHERE (Race_number = %s AND Initials = %s) OR (Race_number = %s AND Initials = %s) OR (Race_number = %s AND Initials = %s) "
-            cursor.execute(query, (race_counter, Driver, race_counter, Driver_two, race_counter, Driver_three))
+            cursor.execute(query, (race_counter+1, Driver, race_counter+1, Driver_two, race_counter+1, Driver_three))
             rows = cursor.fetchall()
             cursor.close()
     except Error as e:
@@ -53,9 +55,15 @@ def query_with_variables(race_counter, Driver, Driver_two, Driver_three):
         if connection.is_connected():
             connection.close()
     points_counter = 0
+    print(Driver)
+    print(Driver_two)
+    print(Driver_three)
     for tup in rows:
         points_counter += sum(tup)
+        print(points_counter)
+        
         # points_counter = int(points_counter)
+    print(points_counter)
     return points_counter
 
 def query_for_driver_list(Race_counter):
@@ -124,23 +132,22 @@ def select_driver():
         player_name = request.form.get('player_name')
         difficulty = request.form.get('difficulty')
         
-        # Driver = request.form['driver']
-        # Driver = "VER"
         Driver = request.form.get('driver')
-        print(f'Selected driver: {Driver}')
-        # Driver_two = request.form.get('driver_two')
-        Driver_two = "PER"
-        # Driver_three = request.form.get('driver_three')
-        Driver_three = "SAI"
+        
+        Driver_two = request.form.get('driver_two')
+        Driver_three = request.form.get('driver_three')
+        print(f'Selected driver: {Driver, Driver_two, Driver_three}')
         points = request.form.get('points', type=int)
         
         if race_counter >= races:  # Check if race_counter reaches the number of races
             return render_template('end.html', player_name=player_name, points=points, races=races, difficulty=difficulty)
         
         points += query_with_variables(race_counter, Driver, Driver_two, Driver_three) 
+        print(points)
 
 
-        return redirect(url_for('ai', points=points, player_name=player_name, races=races, difficulty=difficulty, race_counter=race_counter))
+        # return redirect(url_for('ai', points=points, player_name=player_name, races=races, difficulty=difficulty, race_counter=race_counter))
+        # return render_template('ai.html', points=points, player_name=player_name, races=races, difficulty=difficulty, race_counter=race_counter)
 
         
         
@@ -179,6 +186,18 @@ def ai():
         player_name = request.args.get('player_name') #Shows playername
         difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
         points = request.args.get('points', type = int)
+        Driver = request.form.get('driver')
+        
+        Driver_two = request.form.get('driver_two')
+        Driver_three = request.form.get('driver_three')
+
+
+
+        print(f'Selected driver: {Driver, Driver_two, Driver_three}')
+        points = request.form.get('points', type=int)
+        
+        
+        points += query_with_variables(race_counter, Driver, Driver_two, Driver_three) 
         
     elif request.method == 'POST':
         race_counter = request.form.get('race_counter', type=int)
@@ -186,6 +205,18 @@ def ai():
         player_name = request.form.get('player_name')
         difficulty = request.form.get('difficulty')
         points = request.form.get('points', type = int)
+        Driver = request.form.get('driver')
+        
+        Driver_two = request.form.get('driver_two')
+        Driver_three = request.form.get('driver_three')
+
+
+
+        print(f'Selected driver: {Driver, Driver_two, Driver_three}')
+        points = request.form.get('points', type=int)
+        
+        
+        points += query_with_variables(race_counter, Driver, Driver_two, Driver_three) 
         
         
     
