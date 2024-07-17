@@ -29,31 +29,17 @@
             <input type="hidden" name="player_name" value="{{ player_name }}">
             <input type="hidden" name="difficulty" value="{{ difficulty }}">
             <input type="hidden" name="points" value="{{ points }}">
+            <input type="hidden" name="ai_points" value="{{ ai_points }}">
+            <input type="hidden" name="difficulty_check" value="{{ difficulty_check}}">
             <input type="hidden" name="races" value="{{ races }}">
             <input type="hidden" name="race_counter" value="{{ race_counter }}">
             <button type="submit" class="submit-button">NEXT</button>
         </form>
         
-        <table>
-            <thead>
-                <tr>
-                    <th>Position</th>
-                    <th>Driver</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for driver in driver_list %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ driver }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+        
 </body>
 
-    <img src="{{ this_race_picture }}" alt="F1 track night" class="second-photo">
+    <img src="{{ this_race_picture }}" alt="F1 track night" class="third-photo">
     <p class = "credit">This is an educational project by Robyn Doyle</p>
     <!-- <p class="credit-two">bob</p> -->
 
@@ -62,7 +48,13 @@
 
     <p class="player-info-left_one">Player: {{ player_name }} Points = {{ points }} </p>
     <p class="player-info-left_two"> Races: {{ race_counter }} of {{ races }} </p>
-    <p class="player-info-left_three">Difficulty: {{ difficulty }}</p>
+    <p class="player-info-left_three">Difficulty: {{ difficulty_check }}</p>
+
+    <p class="ai-info-right_one">Ai Score: {{ ai_points}}</p>
+
+    <p class="race-info-mid">Race results{{ driver_list[0:9] }}</p>
+    <p class="race-info-mid-two">{{ driver_list[10:] }}</p>
+
 </body>
 </html>
 {% endblock %}

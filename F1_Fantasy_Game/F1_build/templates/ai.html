@@ -25,15 +25,17 @@
     
     <form action="{{ url_for('result') }}" class="race_form" method="POST">
         <input type="hidden" name="player_name" value="{{ player_name }}">
+        <input type="hidden" name="difficulty_check" value="{{ difficulty_check}}">
         <input type="hidden" name="difficulty" value="{{ difficulty }}">
         <input type="hidden" name="points" value="{{ points }}">
+        <input type="hidden" name="ai_points" value="{{ ai_points }}">
         <input type="hidden" name="races" value="{{ races }}">
         <input type="hidden" name="race_counter" value="{{ race_counter }}">
         <button type="submit" class="submit-button">NEXT</button>
     </form>
     
 
-    <img src="{{ this_race_picture }}" alt="F1 track night" class="second-photo">
+    <img src="{{ this_race_picture }}" alt="F1 track night" class="third-photo">
     <p class = "credit">This is an educational project by Robyn Doyle</p>
     <!-- <p class="credit-two">bob</p> -->
 
@@ -42,7 +44,10 @@
 
     <p class="player-info-left_one">Player: {{ player_name }} Points = {{ points }} </p>
     <p class="player-info-left_two"> Races: {{ race_counter+1 }} of {{ races }} </p>
-    <p class="player-info-left_three">Difficulty: {{ difficulty }}</p>
+    <p class="player-info-left_three">Difficulty: {{ difficulty_check }}</p>
+
+    <p class="ai-info-mid">Ai Choice = {{ ai_drivers}}</p>
+
 </body>
 </html>
 {% endblock %}
