@@ -33,7 +33,7 @@ def get_current_race_picture(race_counter):
 
 
 
-def query_with_variables(Count, Driver, Driver_two, Driver_three):
+def query_with_variables(race_counter, Driver, Driver_two, Driver_three):
     try:
         connection = mysql.connector.connect(
             host='127.0.0.1',
@@ -44,7 +44,7 @@ def query_with_variables(Count, Driver, Driver_two, Driver_three):
         if connection.is_connected():
             cursor = connection.cursor()
             query = "SELECT Points FROM F1_2023 WHERE (Race_number = %s AND Initials = %s) OR (Race_number = %s AND Initials = %s) OR (Race_number = %s AND Initials = %s) "
-            cursor.execute(query, (Count, Driver, Count, Driver_two, Count, Driver_three))
+            cursor.execute(query, (race_counter, Driver, race_counter, Driver_two, race_counter, Driver_three))
             rows = cursor.fetchall()
             cursor.close()
     except Error as e:
@@ -55,6 +55,7 @@ def query_with_variables(Count, Driver, Driver_two, Driver_three):
     points_counter = 0
     for tup in rows:
         points_counter += sum(tup)
+        # points_counter = int(points_counter)
     return points_counter
 
 def query_for_driver_list(Race_counter):
@@ -86,7 +87,7 @@ def Select_driver(Race_counter):
 
 # ________________________________________FLASK PART_____________________________________________________________
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
     
     return render_template('index.html')
@@ -94,8 +95,8 @@ def home():
 @app.route('/start', methods=['GET', 'POST'])
 def start():
     
-
     race_counter = 0
+    points = 0
     
     if request.method == 'POST':
         player_name = request.form['player_name'].upper()
@@ -103,7 +104,7 @@ def start():
         races = request.form['races']
         difficulty = request.form['difficulty']
         # Redirect to the select_driver page with player_name in the query string
-        return redirect(url_for('select_driver', player_name=player_name, races=races, difficulty=difficulty, race_counter=race_counter))
+        return redirect(url_for('select_driver', points=points, player_name=player_name, races=races, difficulty=difficulty, race_counter=race_counter))
     return render_template('start.html')
 
 
@@ -115,11 +116,33 @@ def select_driver():
         races = request.args.get('races', type = int)
         player_name = request.args.get('player_name') #Shows playername
         difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
-    elif request.method == 'POST':
+        points = request.args.get('points', type = int)
+         
+    if request.method == 'POST':
         race_counter = request.form.get('race_counter', type=int)
         races = request.form.get('races', type=int)
         player_name = request.form.get('player_name')
         difficulty = request.form.get('difficulty')
+        
+        # Driver = request.form['driver']
+        # Driver = "VER"
+        Driver = request.form.get('driver')
+        print(f'Selected driver: {Driver}')
+        # Driver_two = request.form.get('driver_two')
+        Driver_two = "PER"
+        # Driver_three = request.form.get('driver_three')
+        Driver_three = "SAI"
+        points = request.form.get('points', type=int)
+        
+        if race_counter >= races:  # Check if race_counter reaches the number of races
+            return render_template('end.html', player_name=player_name, points=points, races=races, difficulty=difficulty)
+        
+        points += query_with_variables(race_counter, Driver, Driver_two, Driver_three) 
+
+
+        return redirect(url_for('ai', points=points, player_name=player_name, races=races, difficulty=difficulty, race_counter=race_counter))
+
+        
         
     
   
@@ -129,7 +152,7 @@ def select_driver():
     
 
     if race_counter >= races:  # Check if race_counter reaches the number of races
-        return render_template('end.html', player_name=player_name, races=races, difficulty=difficulty)
+        return render_template('end.html', player_name=player_name, points=points, races=races, difficulty=difficulty)
 
 
     driver_list = Select_driver(race_counter)
@@ -141,7 +164,9 @@ def select_driver():
     
     # race_counter += 1 #Iterates for the next race
     
-    return render_template('select_driver.html', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
+    return render_template('select_driver.html', race_counter=race_counter, player_name=player_name, races=races,
+                           difficulty=difficulty, current_race=current_race, points=points,  
+                           this_race_picture=this_race_picture, driver_list=driver_list )
    
     
     # else: return render_template('end_game.html')
@@ -153,11 +178,16 @@ def ai():
         races = request.args.get('races', type = int)
         player_name = request.args.get('player_name') #Shows playername
         difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
+        points = request.args.get('points', type = int)
+        
     elif request.method == 'POST':
         race_counter = request.form.get('race_counter', type=int)
         races = request.form.get('races', type=int)
         player_name = request.form.get('player_name')
         difficulty = request.form.get('difficulty')
+        points = request.form.get('points', type = int)
+        
+        
     
     total_races = []
     total_races += total_racesz()
@@ -166,7 +196,7 @@ def ai():
     current_race = get_current_race(races, race_counter, total_races) #Gets name of current race
     
     this_race_picture = get_current_race_picture(race_counter) #Gets different picture for each race
-    return render_template('ai.html', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
+    return render_template('ai.html', race_counter=race_counter, points=points, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
@@ -175,11 +205,13 @@ def result():
         races = request.args.get('races', type = int)
         player_name = request.args.get('player_name') #Shows playername
         difficulty = request.args.get('difficulty') #Outputs chose difficulty of this session
+        points = request.args.get('points', type = int)
     elif request.method == 'POST':
         race_counter = request.form.get('race_counter', type=int)
         races = request.form.get('races', type=int)
         player_name = request.form.get('player_name')
         difficulty = request.form.get('difficulty')
+        points = request.form.get('points', type = int)
     
     total_races = []
     total_races += total_racesz()
@@ -189,7 +221,7 @@ def result():
     
     this_race_picture = get_current_race_picture(race_counter) #Gets different picture for each race
     race_counter += 1
-    return render_template('result.html', race_counter=race_counter, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
+    return render_template('result.html', race_counter=race_counter, points=points, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
 
 
 # app.run(host="0.0.0.0", port=80)

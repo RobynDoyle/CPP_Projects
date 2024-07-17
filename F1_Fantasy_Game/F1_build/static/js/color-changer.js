@@ -23,5 +23,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     changeColor();
-    setInterval(changeColor, 50); // Repeat color change every 5 seconds
+    setInterval(changeColor, 50); // Repeat color change every .5 seconds
 });

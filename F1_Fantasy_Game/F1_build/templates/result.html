@@ -28,6 +28,7 @@
         <form action="{{ url_for('select_driver') }}" class="race_form" method="POST">
             <input type="hidden" name="player_name" value="{{ player_name }}">
             <input type="hidden" name="difficulty" value="{{ difficulty }}">
+            <input type="hidden" name="points" value="{{ points }}">
             <input type="hidden" name="races" value="{{ races }}">
             <input type="hidden" name="race_counter" value="{{ race_counter }}">
             <button type="submit" class="submit-button">NEXT</button>
@@ -59,7 +60,7 @@
    
     
 
-    <p class="player-info-left_one">Player: {{ player_name }} </p>
+    <p class="player-info-left_one">Player: {{ player_name }} Points = {{ points }} </p>
     <p class="player-info-left_two"> Races: {{ race_counter }} of {{ races }} </p>
     <p class="player-info-left_three">Difficulty: {{ difficulty }}</p>
 </body>
