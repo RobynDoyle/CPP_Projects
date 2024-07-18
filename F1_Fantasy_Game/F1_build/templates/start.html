@@ -7,18 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .controls {
-            margin-top: 20px;
-        }
-    </style>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
@@ -31,11 +19,6 @@
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
     </div>
   
-  
-  
-    <!-- {{ url_for('start') }} -->
-
-
     <nav class="button-menu">
         <form action="{{ url_for('start') }}" method="POST">
             <label for="player_name" class="font">Enter your name:</label>
@@ -48,23 +31,14 @@
                 <option value="MEDIUM">Medium</option>
                 <option value="HARD">Hard</option>
             </select><br><br>
-            <button type="submit">Race</button>
-
-            
-
-            
+            <button type="submit">Race</button> 
         </form>
     </nav>
-
 
     <img src="{{ url_for('static', filename='images/redbull.jpeg') }}" alt="F1 Cars Photo" class="second-photo">
     
     
     <p class = "credit">This is an educational project by Robyn Doyle {{ player_name }}</p>
-
-    {% if player_name %}
-    <p class="credit-two">Welcome, {{ player_name }}!</p>
-    {% endif %}
     
 </body>
 </html>

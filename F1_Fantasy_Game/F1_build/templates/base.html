@@ -5,19 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
-  
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .controls {
-            margin-top: 20px;
-        }
-    </style>
+
 
 <link rel="icon" href="{{ url_for('static', filename='images/circle.png') }}" type="image/x-icon">
 <link rel="shortcut icon" href="{{ url_for('static', filename='images/circle.png') }}" type="image/x-icon">
@@ -31,7 +19,9 @@
     {% block content %}{% endblock %}
    
     <i class="fas fa-music music-icon" id="musicIcon"></i>
-    <!-- Audio player -->
+
+    
+  
     <audio id="myAudio" loop>
         <source src="{{ url_for('static', filename='music/Music_r.mp3') }}" type="audio/mpeg">
         Your browser does not support the audio element.
@@ -43,8 +33,6 @@
 
     <script src="{{ url_for('static', filename='js/color-changer.js') }}"></script>
     <script src="{{ url_for('static', filename='js/music_list.js') }}"></script>
-
-   
 
 
 </body>

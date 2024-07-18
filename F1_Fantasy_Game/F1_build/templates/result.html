@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}F1 - Choose Drivers{% endblock %}
+{% block title %}F1 - Race Results{% endblock %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,6 @@
 </head>
 <body>
     
-
     <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
     <div>
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
@@ -26,8 +25,6 @@
     <div>
         <h4 class="font">Driver Finishing Positions</h4>
 
-        
-        
         <form action="{{ url_for('select_driver') }}" class="race_form" method="POST">
             <input type="hidden" name="player_name" value="{{ player_name }}">
             <input type="hidden" name="difficulty" value="{{ difficulty }}">
@@ -39,17 +36,11 @@
             <button type="submit" class="submit-button">NEXT</button>
         </form>
     </div>    
-        
-
-
     
     <p class = "credit">This is an educational project by Robyn Doyle</p>
-    <!-- <p class="credit-two">bob</p> -->
     <p class="race-info-mid">{{ driver_list[0:10] }}</p>
     <p class="race-info-mid-two">{{ driver_list[10:] }}</p>
    
-    
-
     <p class="player-info-left_one">Player: {{ player_name }}  </p>
     <p class="player-info-left_two">Races: {{ race_counter }} of {{ races }}</p>
     <p class="player-info-left_three"> Points = {{ points }} </p>
@@ -57,8 +48,6 @@
     <p class="ai-info-right_one">Computer</p>
     <p class="ai-info-right_two">Difficulty: {{ difficulty_check }}</p>
     <p class="ai-info-right_three">Points = {{ ai_points}}</p>
-
-
 
 </body>
 </html>

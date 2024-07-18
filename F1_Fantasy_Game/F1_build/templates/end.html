@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}F1 - Choose Drivers{% endblock %}
+{% block title %}F1 - End{% endblock %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,14 +12,12 @@
 <body>
     <img src="{{ url_for('static', filename='images/Trophy.jpg') }}" alt="F1 trophu Photo" class="fourth-photo">
 
-
     <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
     <div>
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
     </div>
   
-
     <h2 class="center-text">END OF CHAMPIONSHIP</h2>
 
     <form action="{{ url_for('home') }}" class="race_form" method="POST">
@@ -37,10 +35,7 @@
     <p class="race-info-mid_three">Championship winner is </p>
     <p class="race-info-mid_four">{{ champion }}</p>
 
-
-
     <p class = "credit">This is an educational project by Robyn Doyle</p>
-
 
 </body>
 </html>

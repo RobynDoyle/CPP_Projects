@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}F1 - Choose Drivers{% endblock %}
+{% block title %}F1 - Computer's Turn{% endblock %}
 {% block content %}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,15 +12,12 @@
 </head>
 <body>
     
-   
-
     <h1 id="colorful-heading">F1  LEAGUE  2023</h1>
     <div>
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-left-logo">
         <img src="{{ url_for('static', filename='images/F1-Logo.png') }}" alt="F1 Logo" class="top-right-logo">
     </div>
   
-
     <h2 class="center-text">AI's Choice</h2>
     
     <form action="{{ url_for('result') }}" class="race_form" method="POST">
@@ -34,15 +31,10 @@
         <button type="submit" class="submit-button">NEXT</button>
     </form>
     
-
     <img src="{{ this_race_picture }}" alt="F1 track night" class="third-photo">
     <p class = "credit">This is an educational project by Robyn Doyle</p>
-    <!-- <p class="credit-two">bob</p> -->
 
-   
-    
-
-  <p class="player-info-left_one">Player: {{ player_name }}  </p>
+    <p class="player-info-left_one">Player: {{ player_name }}  </p>
     <p class="player-info-left_two">Races: {{ race_counter+1 }} of {{ races }}</p>
     <p class="player-info-left_three"> Points = {{ points }} </p>
 

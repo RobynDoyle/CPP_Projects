@@ -176,8 +176,6 @@ img {
     height: 80%;
 }
 
-
-
 .credit{
     /* top: 1070px; */
     /* bottom: 10px; */
@@ -330,7 +328,7 @@ img {
     color: white;
 }
 
-.race-info-mid, .race-info-mid-two, .race-info-mid_three, .race-info-mid_four {
+.race-info-mid, .race-info-mid-two, .race-info-mid_three, .race-info-mid_four, .race-info-mid-five {
     position: absolute;
     top: 210px; /* Adjust the value to your preference */
     right: 20%;
@@ -362,6 +360,14 @@ img {
     top: 210px; /* Adjust the value to your preference */
     left: 50%;  /* Center horizontally based on the left edge */
     transform: translateX(-50%);  /* Adjust to center the element */
+    text-align: center;    
+}
+
+    .race-info-mid-five {
+    position: absolute;
+    top: 210px; 
+    left: 20%;  
+    /* transform: translateX(-50%);   */
     text-align: center;    
 }
 

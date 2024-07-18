@@ -140,8 +140,16 @@ def start():
         return redirect(url_for('select_driver', difficulty_check=difficulty_check, ai_points=ai_points, points=points, player_name=player_name, races=races, difficulty=difficulty, race_counter=race_counter))
     return render_template('start.html')
 
+@app.route('/about', methods=['GET', 'POST'])
+def about():
+    return render_template('about.html')
 
-    
+@app.route('/credit', methods=['GET', 'POST'])
+def credit():
+    return render_template('credit.html')
+
+
+
 @app.route('/select_driver', methods=['GET', 'POST'])
 def select_driver():
     if request.method == 'GET':
@@ -185,9 +193,7 @@ def select_driver():
     return render_template('select_driver.html', ai_points=ai_points, race_counter=race_counter, player_name=player_name, races=races,
                            difficulty=difficulty, current_race=current_race, points=points, difficulty_check=difficulty_check, 
                            this_race_picture=this_race_picture, driver_list=driver_list )
-   
-    
-
+      
 @app.route('/ai', methods=['GET', 'POST'])
 def ai():
         
@@ -241,9 +247,6 @@ def result():
     this_race_picture = get_current_race_picture(race_counter) #Gets different picture for each race
     race_counter += 1
     return render_template('result.html', ai_points=ai_points, difficulty_check=difficulty_check, race_counter=race_counter, points=points, player_name=player_name, races=races, difficulty=difficulty, current_race=current_race, this_race_picture=this_race_picture, driver_list=driver_list )
-
-
-# app.run(host="0.0.0.0", port=80)
 
 if __name__ == '__main__':
     app.run(debug=True)
