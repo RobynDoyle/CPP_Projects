@@ -26,11 +26,18 @@
         <button type="submit" class="submit-button">HOME</button>
     </form>
 
-    <p class="player-info-left_one">Player: {{ player_name }} Points = {{ points }} </p>
-    <p class="player-info-left_two"> Total Races completed = {{ races }} </p>
-    <p class="player-info-left_three">Difficulty: {{ difficulty_check }}</p>
+    <p class="player-info-left_one">Player: {{ player_name }}  </p>
+    <p class="player-info-left_two">Races: {{ race_counter }}</p>
+    <p class="player-info-left_three"> Points = {{ points }} </p>
 
-    <p class="ai-info-right_one">Ai Score: {{ ai_points }}</p>
+    <p class="ai-info-right_one">Computer</p>
+    <p class="ai-info-right_two">Difficulty: {{ difficulty_check }}</p>
+    <p class="ai-info-right_three">Points = {{ ai_points}}</p>
+
+    <p class="race-info-mid_three">Championship winner is </p>
+    <p class="race-info-mid_four">{{ champion }}</p>
+
+
 
     <p class = "credit">This is an educational project by Robyn Doyle</p>
 

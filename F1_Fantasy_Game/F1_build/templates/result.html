@@ -21,8 +21,11 @@
   
 
     <h2 class="center-text">RACE RESULTS</h2>
+    <img src="{{ this_race_picture }}" alt="F1 track night" class="third-photo">
+
     <div>
         <h4 class="font">Driver Finishing Positions</h4>
+
         
         
         <form action="{{ url_for('select_driver') }}" class="race_form" method="POST">
@@ -35,25 +38,27 @@
             <input type="hidden" name="race_counter" value="{{ race_counter }}">
             <button type="submit" class="submit-button">NEXT</button>
         </form>
+    </div>    
         
-        
-</body>
 
-    <img src="{{ this_race_picture }}" alt="F1 track night" class="third-photo">
+
+    
     <p class = "credit">This is an educational project by Robyn Doyle</p>
     <!-- <p class="credit-two">bob</p> -->
-
+    <p class="race-info-mid">{{ driver_list[0:10] }}</p>
+    <p class="race-info-mid-two">{{ driver_list[10:] }}</p>
    
     
 
-    <p class="player-info-left_one">Player: {{ player_name }} Points = {{ points }} </p>
-    <p class="player-info-left_two"> Races: {{ race_counter }} of {{ races }} </p>
-    <p class="player-info-left_three">Difficulty: {{ difficulty_check }}</p>
+    <p class="player-info-left_one">Player: {{ player_name }}  </p>
+    <p class="player-info-left_two">Races: {{ race_counter }} of {{ races }}</p>
+    <p class="player-info-left_three"> Points = {{ points }} </p>
 
-    <p class="ai-info-right_one">Ai Score: {{ ai_points}}</p>
+    <p class="ai-info-right_one">Computer</p>
+    <p class="ai-info-right_two">Difficulty: {{ difficulty_check }}</p>
+    <p class="ai-info-right_three">Points = {{ ai_points}}</p>
 
-    <p class="race-info-mid">Race results{{ driver_list[0:9] }}</p>
-    <p class="race-info-mid-two">{{ driver_list[10:] }}</p>
+
 
 </body>
 </html>

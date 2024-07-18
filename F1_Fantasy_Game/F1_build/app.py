@@ -168,7 +168,14 @@ def select_driver():
     total_races += total_racesz()
 
     if race_counter >= races:  # Check if race_counter reaches the number of races
-        return render_template('end.html', difficulty_check=difficulty_check, ai_points=ai_points, player_name=player_name, points=points, races=races, difficulty=difficulty)
+        champion = "bob"
+        if ai_points == points:
+            champion = player_name + "tied with Computer"
+        elif ai_points > points:
+            champion = "Computer"
+        else:
+            champion = player_name
+        return render_template('end.html', champion=champion, difficulty_check=difficulty_check, ai_points=ai_points, player_name=player_name, points=points, races=races, difficulty=difficulty)
 
     driver_list = Select_driver(race_counter)
     current_race = get_current_race(races, race_counter, total_races) #Gets name of current race 

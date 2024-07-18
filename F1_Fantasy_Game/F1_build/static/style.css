@@ -291,31 +291,48 @@ img {
     padding: 0;
     color: white;
 }
-.ai-info-right_one {
+.ai-info-right_one, .ai-info-right_two, .ai-info-right_three {
     position: absolute;
+    font-size: 24px; /* Adjust the value to your preference */
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.ai-info-right_one {
     top: 170px; /* Adjust the value to your preference */
     right: 10px; /* Adjust the value to your preference */
     text-align: left;
-    font-size: 24px; /* Adjust the value to your preference */
-    margin: 0;
-    padding: 0;
-    color: white;
 }
+
+.ai-info-right_two {
+    top: 210px; /* Adjust the value to your preference */
+    right: 10px; /* Adjust the value to your preference */
+    text-align: left;
+}
+
+.ai-info-right_three {
+    top: 250px; /* Adjust the value to your preference */
+    right: 12px; /* Adjust the value to your preference */
+    text-align: left;
+}
+
 
 .ai-info-mid {
     position: absolute;
-    top: 250px; /* Adjust the value to your preference */
-    right: 35%; /* Adjust the value to your preference */
-    text-align: left;
+    top: 170px; /* Adjust the value to your preference */
+    left: 50%;  /* Center horizontally based on the left edge */
+    transform: translateX(-50%);  /* Adjust to center the element */
+    text-align: center;
     font-size: 24px; /* Adjust the value to your preference */
     margin: 0;
     padding: 0;
     color: white;
 }
 
-.race-info-mid, .race-info-mid-two {
+.race-info-mid, .race-info-mid-two, .race-info-mid_three, .race-info-mid_four {
     position: absolute;
-    top: 290px; /* Adjust the value to your preference */
+    top: 210px; /* Adjust the value to your preference */
     right: 20%;
     text-align: center;
     font-size: 24px; /* Adjust the value to your preference */
@@ -326,10 +343,26 @@ img {
 
 .race-info-mid-two {
     position: absolute;
-    top: 320px; /* Adjust the value to your preference */
+    top: 250px; /* Adjust the value to your preference */
     right: 20%; 
     text-align: center;
     
+}
+
+.race-info-mid_three {
+    position: absolute;
+    top: 170px; /* Adjust the value to your preference */
+    left: 50%;  /* Center horizontally based on the left edge */
+    transform: translateX(-50%);  /* Adjust to center the element */
+    text-align: center;    
+}
+
+.race-info-mid_four {
+    position: absolute;
+    top: 210px; /* Adjust the value to your preference */
+    left: 50%;  /* Center horizontally based on the left edge */
+    transform: translateX(-50%);  /* Adjust to center the element */
+    text-align: center;    
 }
 
 .race_form {
@@ -346,9 +379,11 @@ img {
 }
 
 .submit-button {
-    align-self: center; /* Align the submit button at the end of the form */
-    
-    margin-top: 20px; /* Optional: Add some space above the submit button */
+    align-self: center; 
+    position: absolute;
+
+   
+    margin-top: 180px; /* Optional: Add some space above the submit button */
     
 }
 
